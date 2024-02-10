@@ -15,6 +15,7 @@ import java.util.List;
 
 public class GameMaster extends ApplicationAdapter {
 
+	// Daniel Test Git Push
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private EntityManager entityManager;
