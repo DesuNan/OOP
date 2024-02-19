@@ -12,7 +12,7 @@ public abstract class Entity implements iMovable {
     protected boolean userControlled;
 
     public Entity() {
-        this(0, 0, 500, true);
+        this(100, 0, 500, true);
     }
 
     public Entity(float x, float y, float speed, boolean userControlled) {
@@ -59,19 +59,19 @@ public abstract class Entity implements iMovable {
     public void moveAIControlled() {
     	// Implement AI-controlled movement logic for TextureObject
         // Update the x and y positions based on AI-controlled movement
-        x += Gdx.graphics.getDeltaTime() * speed;
+        y += Gdx.graphics.getDeltaTime() * speed;
     }
 
     @Override
     public void moveUserControlled() {
     	// Implement user-controlled movement logic for TextureObject
         // Example: Move left when left arrow key is pressed
-        if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-            x -= Gdx.graphics.getDeltaTime() * speed;
+        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+            y -= Gdx.graphics.getDeltaTime() * speed;
         }
         // Example: Move right when right arrow key is pressed
         if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-            x += Gdx.graphics.getDeltaTime() * speed;
+            y += Gdx.graphics.getDeltaTime() * speed;
         }
     }
 

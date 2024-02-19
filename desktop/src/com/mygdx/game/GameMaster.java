@@ -21,11 +21,10 @@ public class GameMaster extends ApplicationAdapter {
     private EntityManager entityManager;
     private List<CircleObject> circles;
     private List<TriangleObject> triangles;
+    private List<RectangleObject> rectangles;
     private List<Entity> entityList;
 
     float dropSpeed = 200;
-    int numberOfDrops = 10;
-
   
     public class TextureObject extends Entity {
 
@@ -39,7 +38,7 @@ public class GameMaster extends ApplicationAdapter {
             this.aiControlled = aiControlled;
             this.startY = properties[1];
         }
-
+        
         @Override
         public void move() {
             if (aiControlled) {
@@ -54,30 +53,16 @@ public class GameMaster extends ApplicationAdapter {
             // Implement the AI-controlled movement logic for the droplet
 
             // Example: Move downward
-            y -= Gdx.graphics.getDeltaTime() * speed;
+            x -= Gdx.graphics.getDeltaTime() * speed;
 
             // Optional: Adjust the logic based on your requirements
-            if (y <= 0) {
+            if (x <= 0) {
                 // Reset to the top when reaching the bottom edge
-                y = Gdx.graphics.getHeight();
+                x = Gdx.graphics.getHeight();
             }
         }
 
-        @Override
-        public void moveUserControlled() {
-            // Implement user-controlled movement logic for TextureObject
-            // Example: Move left when left arrow key is pressed
-            if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-                x -= Gdx.graphics.getDeltaTime() * speed;
-            }
-            // Example: Move right when right arrow key is pressed
-            if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-                x += Gdx.graphics.getDeltaTime() * speed;
-            }
-        }
-        // Other methods...
-
-        @Override
+       @Override
         public void draw(ShapeRenderer shapeRenderer) {
             shapeRenderer.setColor(Color.WHITE);
             shapeRenderer.rect(x, y, texture.getWidth(), texture.getHeight());
@@ -85,72 +70,6 @@ public class GameMaster extends ApplicationAdapter {
 
         public void dispose() {
             texture.dispose();
-        }
-    }
-
-    // CircleObject class
-    public class CircleObject extends Entity {
-        private float radius;
-        private Color color;
-
-        public CircleObject(float radius, Color color, float x, float y, float speed) {
-            super(x, y, speed, true);
-            this.radius = radius;
-            this.color = color;
-            this.userControlled = true;
-        }
-
-        @Override
-        public void draw(ShapeRenderer shapeRenderer) {
-            shapeRenderer.setColor(color);
-            shapeRenderer.circle(x, y, radius);
-        }
-        
-        @Override
-        public void moveUserControlled() {
-            // Implement user-controlled movement logic for CircleObject
-            // Example: Move up when up arrow key is pressed
-            if (Gdx.input.isKeyPressed(Keys.UP)) {
-                y += Gdx.graphics.getDeltaTime() * speed;
-            }
-            // Example: Move down when down arrow key is pressed
-            if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-                y -= Gdx.graphics.getDeltaTime() * speed;
-            }
-        }
-    }
-
-    // TriangleObject class
-    public class TriangleObject extends Entity {
-        private Vector2 p1;
-        private Vector2 p2;
-        private Vector2 p3;
-        private Color color;
-
-        public TriangleObject(Vector2 p1, Vector2 p2, Vector2 p3, Color color, float x, float y, float speed) {
-            super(x, y, speed, true);
-            this.p1 = p1;
-            this.p2 = p2;
-            this.p3 = p3;
-            this.color = color;
-        }
-
-        @Override
-        public void draw(ShapeRenderer shapeRenderer) {
-            shapeRenderer.setColor(color);
-            shapeRenderer.triangle(p1.x + x, p1.y + y, p2.x + x, p2.y + y, p3.x + x, p3.y + y);
-        }
-
-        public void moveUserControlled() {
-            // Implement user-controlled movement logic for TriangleObject
-            // Example: Move left when A key is pressed
-            if (Gdx.input.isKeyPressed(Keys.A)) {
-                x -= Gdx.graphics.getDeltaTime() * speed;
-            }
-            // Example: Move right when D key is pressed
-            if (Gdx.input.isKeyPressed(Keys.D)) {
-                x += Gdx.graphics.getDeltaTime() * speed;
-            }
         }
     }
 
@@ -165,9 +84,15 @@ public class GameMaster extends ApplicationAdapter {
         TextureObject droplet = new TextureObject("droplet.png", new float[]{200.0f, 200.0f, 200}, true);
         entityList.add(droplet);
         entityManager.addEntity(droplet);
-        TextureObject bucket = new TextureObject("bucket.png", new float[]{200.0f, 0.0f, 500}, false);
+        TextureObject bucket = new TextureObject("bucket.png", new float[]{50.0f, 100.0f, 500}, false);
         entityList.add(bucket);
         entityManager.addEntity(bucket);
+        
+        // Create Rectangle
+        rectangles = new ArrayList<>();
+        RectangleObject rectangle = new RectangleObject(100, 200, Color.WHITE, 500, 290, 100);
+        rectangles.add(rectangle);
+        entityManager.addEntity(rectangle);
 
         // Create circles
         circles = new ArrayList<>();
@@ -213,10 +138,13 @@ public class GameMaster extends ApplicationAdapter {
         for (CircleObject circle : circles) {
             circle.draw(shapeRenderer);
         }
-
         // Draw triangles
         for (TriangleObject triangle : triangles) {
             triangle.draw(shapeRenderer);
+        }
+        // Draw rectangle
+        for (RectangleObject rectangle : rectangles) {
+        	rectangle.draw(shapeRenderer);
         }
 
         shapeRenderer.end();
