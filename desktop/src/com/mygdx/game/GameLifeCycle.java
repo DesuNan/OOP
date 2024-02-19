@@ -5,7 +5,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class GameLifeCycle extends ApplicationAdapter{
 private int GameStatus;
-private Timer GameTime;
 private EntityManager EntityManager;
 private SceneManager SceneManager;
 
