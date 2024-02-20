@@ -89,10 +89,10 @@ public class GameMaster extends ApplicationAdapter {
 
     @Override
     public void create() {
-        
         entityManager = new EntityManager();
         entityManager.addEntity(new Bird(100,100));
         entityManager.addEntity(new Tubes(500));
+        
     }
 
     @Override
