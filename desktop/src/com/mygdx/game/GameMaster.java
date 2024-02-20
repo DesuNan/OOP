@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import java.util.Random;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -9,23 +11,24 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameMaster extends ApplicationAdapter {
 
-	// Daniel Test Git Push
     private SpriteBatch batch;
+    private Tube tube;
+    private Bird bird;
+    private Texture topTube;
+    private Texture bottomTube;
+
     private ShapeRenderer shapeRenderer;
     private EntityManager entityManager;
-    private List<CircleObject> circles;
-    private List<TriangleObject> triangles;
-    private List<RectangleObject> rectangles;
+    private Tubes tubes;
     private List<Entity> entityList;
-
-    float dropSpeed = 200;
-  
+    
     public class TextureObject extends Entity {
 
         private Texture texture;
@@ -39,7 +42,11 @@ public class GameMaster extends ApplicationAdapter {
             this.startY = properties[1];
         }
         
-        @Override
+        public TextureObject(String string, int i) {
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
         public void move() {
             if (aiControlled) {
                 moveAIControlled();
@@ -61,12 +68,18 @@ public class GameMaster extends ApplicationAdapter {
                 x = Gdx.graphics.getHeight();
             }
         }
-
+        
+/*
        @Override
         public void draw(ShapeRenderer shapeRenderer) {
             shapeRenderer.setColor(Color.WHITE);
             shapeRenderer.rect(x, y, texture.getWidth(), texture.getHeight());
         }
+       */
+       @Override
+       public void draw() {
+           
+       }
 
         public void dispose() {
             texture.dispose();
@@ -75,89 +88,23 @@ public class GameMaster extends ApplicationAdapter {
 
     @Override
     public void create() {
-        batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
-        entityManager = new EntityManager();
-        entityList = new ArrayList<>();
-
-        // Example: Adding a TextureObject to the entity manager
-        TextureObject droplet = new TextureObject("droplet.png", new float[]{200.0f, 200.0f, 200}, true);
-        entityList.add(droplet);
-        entityManager.addEntity(droplet);
-        TextureObject bucket = new TextureObject("bucket.png", new float[]{50.0f, 100.0f, 500}, false);
-        entityList.add(bucket);
-        entityManager.addEntity(bucket);
         
-        // Create Rectangle
-        rectangles = new ArrayList<>();
-        RectangleObject rectangle = new RectangleObject(100, 200, Color.WHITE, 500, 290, 100);
-        rectangles.add(rectangle);
-        entityManager.addEntity(rectangle);
-
-        // Create circles
-        circles = new ArrayList<>();
-        CircleObject circle = new CircleObject(25, Color.RED, 500, 400, 500);
-        circles.add(circle);
-        entityManager.addEntity(circle);
-
-        triangles = new ArrayList<>();
-        TriangleObject triangle = new TriangleObject(
-                new Vector2(100, 100),
-                new Vector2(200, 100),
-                new Vector2(150, 200),
-                Color.BLUE,
-                0, 0, 500
-        );
-        triangles.add(triangle);
-        entityManager.addEntity(triangle);
+        entityManager = new EntityManager();
+        entityManager.addEntity(new Bird(100,100));
+        entityManager.addEntity(new Tubes(500));
     }
 
     @Override
     public void render() {
-        ScreenUtils.clear(0, 1, 0.2f, 1);
-
-        // Update and draw entities
-        entityManager.updateEntities();
-
-        batch.begin();
+       ScreenUtils.clear(0, 1, 0.2f, 1);
+       entityManager.draw();
+    
+       
         
-        // Draw droplets
-        for (Entity entity : entityList) {
-            if (entity instanceof TextureObject) {
-                TextureObject textureObject = (TextureObject) entity;
-                batch.draw(textureObject.texture, entity.getX(), entity.getY());
-            }
-        }
-
-        batch.end();
-
-        // Draw shapes
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
-        // Draw circles
-        for (CircleObject circle : circles) {
-            circle.draw(shapeRenderer);
-        }
-        // Draw triangles
-        for (TriangleObject triangle : triangles) {
-            triangle.draw(shapeRenderer);
-        }
-        // Draw rectangle
-        for (RectangleObject rectangle : rectangles) {
-        	rectangle.draw(shapeRenderer);
-        }
-
-        shapeRenderer.end();
     }
 
     @Override
     public void dispose() {
-        batch.dispose();
-        shapeRenderer.dispose();
-        for (Entity entity : entityList) {
-            if (entity instanceof TextureObject) {
-                ((TextureObject) entity).dispose();
-            }
-        }
+    	entityManager.dispose();
     }
 }

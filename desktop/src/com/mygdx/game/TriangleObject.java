@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
@@ -25,6 +26,10 @@ public class TriangleObject extends Entity {
     public void draw(ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(color);
         shapeRenderer.triangle(p1.x + x, p1.y + y, p2.x + x, p2.y + y, p3.x + x, p3.y +y);
+    }
+    @Override
+    public void draw() {
+        
     }
 
     public void moveUserControlled() {

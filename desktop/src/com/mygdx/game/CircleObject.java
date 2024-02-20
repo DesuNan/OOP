@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 //CircleObject class
@@ -21,6 +22,10 @@ public class CircleObject extends Entity {
     public void draw(ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(color);
         shapeRenderer.circle(x, y, radius);
+    }
+    @Override
+    public void draw() {
+        
     }
     
     @Override

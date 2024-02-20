@@ -2,12 +2,14 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 //Abstract Entity class implementing iMovable
 public abstract class Entity implements iMovable {
     protected float x;
     protected float y;
+    protected float velocityY;
     protected float speed;
     protected boolean userControlled;
 
@@ -74,6 +76,8 @@ public abstract class Entity implements iMovable {
             y += Gdx.graphics.getDeltaTime() * speed;
         }
     }
+   // public abstract void draw(ShapeRenderer shapeRenderer);
 
-    public abstract void draw(ShapeRenderer shapeRenderer);
+	public abstract void draw();
+
 }
