@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 abstract public class Entities {
 	private float x;
@@ -60,7 +61,7 @@ abstract public class Entities {
         y += Gdx.graphics.getDeltaTime() * speed;
     }
 */
-    abstract public void draw();
-    abstract public void dispose();
+    abstract public void draw(SpriteBatch batch);
+    abstract public void dispose(SpriteBatch batch);
    
 }

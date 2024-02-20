@@ -1,35 +1,35 @@
 package com.mygdx.game;
-
 import java.util.*;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 
 public class SceneManager {
-	private List<Scene> SceneList = new ArrayList<Scene>();
-	private Scene CurrentScene;
+	private Stack<Scene> scenes; 
 	
-	public SceneManager () {
-		this.addScene(new Scene("Start"));
-		this.updateCurrentScene(this.getSceneList().get(0));
-	}
-	public List<Scene> getSceneList () {
-		return SceneList;
-	}
 	
-	public Scene getCurrentScene() {
-		return this.CurrentScene;
-	}
-
-	public void addScene(Scene scene) {
-		SceneList.add(scene);
+	public SceneManager(){
+		scenes = new Stack<Scene>();
 		
 	}
 	
-	public void deleteScene(Scene scene) {
-		SceneList.remove(scene);
+	public void push(Scene scene) {
+		scenes.push(scene);
 	}
 	
-	public void updateCurrentScene(Scene scene) {
-		this.CurrentScene = scene;
+	public void pop() {
+		scenes.pop();
 	}
 	
+	public void set(Scene scene) {
+		scenes.pop();
+		scenes.push(scene);
+	}
 	
+	public void update(float dt) {
+		scenes.peek().update(dt);
+	}
+	
+	public void render(SpriteBatch batch) {
+		scenes.peek().render(batch);
+	}
 }

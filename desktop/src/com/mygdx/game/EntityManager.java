@@ -27,16 +27,16 @@ public class EntityManager implements iMovable {
         entityList.add(entity);
     }
     
-    public void draw() {
+    public void draw(SpriteBatch batch) {
     	for (Entities entity: entityList) {
-    		entity.draw();
+    		entity.draw(batch);
     	
     	}
     }
     
-    public void dispose() {
+    public void dispose(SpriteBatch batch) {
     	for (Entities entity: entityList) {
-    		entity.dispose();
+    		entity.dispose(batch);
     	}
     }
 

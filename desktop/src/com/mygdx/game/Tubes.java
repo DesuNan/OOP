@@ -15,9 +15,6 @@ public class Tubes extends Entities {
 	private Vector2 posTopTube, posBotTube;
 	private Random rand;
     
-    
-    private SpriteBatch batch = new SpriteBatch();
-    
     public Tubes(float x) {
 		this.topTube = new Texture("toptube.png");
 		this.bottomTube = new Texture("bottomtube.png");
@@ -61,12 +58,9 @@ public class Tubes extends Entities {
 
 	
 	@Override
-	public void draw() {
-		
-		this.batch.begin();
-		this.batch.draw(this.getTopTube(), this.getPosTopTube().x, this.getPosTopTube().y);
-        this.batch.draw(this.getBottomTube(), this.getPosBottomTube().x, this.getPosBottomTube().y);
-        this.batch.end();
+	public void draw(SpriteBatch batch) {
+		batch.draw(this.getTopTube(), this.getPosTopTube().x, this.getPosTopTube().y);
+        batch.draw(this.getBottomTube(), this.getPosBottomTube().x, this.getPosBottomTube().y);
         
 	}
 	
@@ -79,7 +73,7 @@ public class Tubes extends Entities {
 	}
 	
 	@Override
-	public void dispose() {
-		this.batch.dispose();
+	public void dispose(SpriteBatch batch) {
+		batch.dispose();
 	}
 }

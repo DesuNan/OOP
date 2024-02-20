@@ -8,8 +8,9 @@ import com.mygdx.game.MyGdxGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+		config.setWindowedMode(GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
 		config.setForegroundFPS(60);
 		config.setTitle("My Flappy Game");
-		new Lwjgl3Application(new GameMaster(), config);
+		new Lwjgl3Application(new GameLifeCycle(), config);
 	}
 }

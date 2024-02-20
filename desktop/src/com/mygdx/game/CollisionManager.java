@@ -4,10 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mygdx.game.iCollision;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.EntityManager;
 
 public class CollisionManager implements iCollision {
-
+	protected SceneManager sm;
+	protected SpriteBatch batch;
+	
+	public CollisionManager (SceneManager sm, SpriteBatch batch) {
+		this.sm = sm;
+		this.batch = batch;
+	}
+	
     @Override
     public boolean isCollided(Bird bird, Tubes tubes) {
         boolean collisionWithTopTube = bird.getX() < tubes.getPosTopTube().x + tubes.getTopTube().getWidth() &&
@@ -43,7 +52,7 @@ public class CollisionManager implements iCollision {
                 	System.out.println(bird.getX());
                 	System.out.println(bird.getY());
                 	System.out.println(tubes.getPosBottomTube().x);
-                    System.exit(0); 
+                	sm.set(new EndScene(sm, batch));
                     
                 }
             }

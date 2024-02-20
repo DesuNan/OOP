@@ -11,14 +11,13 @@ public class Bird extends Entities{
 	private Vector3 position;
 	private Vector3 velocity;
 	private Texture bird;
-	private SpriteBatch batch = new SpriteBatch();
 	
 	public Bird(int x, int y) {
 		position = new Vector3(x, y, 0);
 		velocity = new Vector3(0,0,0);
 		this.setUserContolled(true);
 		this.setSpeed(250);
-		bird = new Texture("bucket.png");
+		bird = new Texture("bird.png");
 	}
 	
 	public void update(float dt) {
@@ -55,15 +54,13 @@ public class Bird extends Entities{
         }
     }
 	@Override
-	public void draw() {
-		this.batch.begin();
-		this.batch.draw(this.getBird(), this.getX(), this.getY());
-		this.batch.end();
+	public void draw(SpriteBatch batch) {
+		batch.draw(this.getBird(), this.getX(), this.getY());
 	}
 	
 	
 	@Override
-	public void dispose() {
-		this.batch.dispose();
+	public void dispose(SpriteBatch batch) {
+		batch.dispose();
 	}
 }
