@@ -18,6 +18,7 @@ private GameState GameStatus;
 private EntityManager EntityManager;
 private SceneManager SceneManager;
 private GameClock clock;
+private CollisionManager CollisionManager;
 
 private SpriteBatch batch;
 private BitmapFont font;
@@ -28,6 +29,7 @@ private Skin skin;
 public GameLifeCycle () {
 	this.GameStatus = GameState.Start;
 	this.SceneManager = new SceneManager();
+	this.CollisionManager = new CollisionManager();
 }
 
 

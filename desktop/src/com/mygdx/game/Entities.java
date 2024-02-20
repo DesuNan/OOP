@@ -10,6 +10,9 @@ abstract public class Entities {
     private float velocityY;
     private boolean userControlled;
     
+    
+    public abstract float getWidth();
+    public abstract float getHeight();
 
     public float getX() {
         return this.x;

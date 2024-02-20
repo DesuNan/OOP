@@ -17,7 +17,7 @@ public class Bird extends Entities{
 		position = new Vector3(x, y, 0);
 		velocity = new Vector3(0,0,0);
 		this.setUserContolled(true);
-		this.setSpeed(20);
+		this.setSpeed(250);
 		bird = new Texture("bucket.png");
 	}
 	
@@ -35,10 +35,23 @@ public class Bird extends Entities{
 	}
 	
 	@Override
+	public float getWidth() {
+	    return bird.getWidth();
+	}
+
+	@Override
+	public float getHeight() {
+	    return bird.getHeight();
+	}
+	
+	@Override
 	public void move() {
 		
 		if (Gdx.input.isKeyPressed(Keys.UP)) {
         	this.setY(this.getY() + Gdx.graphics.getDeltaTime() * this.getSpeed());
+        }
+		if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+        	this.setY(this.getY() - Gdx.graphics.getDeltaTime() * this.getSpeed());
         }
     }
 	@Override

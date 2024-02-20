@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.CollisionManager;
+import com.mygdx.game.Entities;
+import com.mygdx.game.EntityManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -19,7 +22,7 @@ import java.util.List;
 public class GameMaster extends ApplicationAdapter {
 
     private SpriteBatch batch;
-    private Tube tube;
+    
     private Bird bird;
     private Texture topTube;
     private Texture bottomTube;
@@ -28,6 +31,12 @@ public class GameMaster extends ApplicationAdapter {
     private EntityManager entityManager;
     private Tubes tubes;
     
+    private CollisionManager collisionManager;
+    
+    private int TUBE_SPACING = 200; 
+    private int TUBE_COUNT = 5; 
+    private int TUBE_START = 500; 
+    private int TUBE_END;
     /*
     public class TextureObject extends Entities {
 
@@ -91,8 +100,13 @@ public class GameMaster extends ApplicationAdapter {
     public void create() {
         entityManager = new EntityManager();
         entityManager.addEntity(new Bird(100,100));
-        entityManager.addEntity(new Tubes(500));
+        collisionManager = new CollisionManager();
         
+        TUBE_END = TUBE_START + (TUBE_COUNT - 1) *TUBE_SPACING; 
+        
+        for (int i = 1; i < TUBE_COUNT; i++) { 
+         entityManager.addEntity(new Tubes(TUBE_START + i * TUBE_SPACING)); 
+        }
     }
 
     @Override
@@ -101,6 +115,9 @@ public class GameMaster extends ApplicationAdapter {
        entityManager.draw();
        entityManager.moveAIControlled();
        entityManager.moveUserControlled();
+       collisionManager.handleCollisions(entityManager.getEntityList());
+       
+       
     }
 
     @Override

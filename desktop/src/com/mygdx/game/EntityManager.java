@@ -14,7 +14,7 @@ public class EntityManager implements iMovable {
     private List<Entities> entityList;
     private CollisionManager CollisionManager;
     private Bird bird;
-    private Tube tube;
+    
 
     public EntityManager() {
         entityList = new ArrayList<>();

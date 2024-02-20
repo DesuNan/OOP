@@ -22,7 +22,7 @@ public class Tubes extends Entities {
 		this.topTube = new Texture("toptube.png");
 		this.bottomTube = new Texture("bottomtube.png");
 		this.rand = new Random();
-		this.setSpeed(10);
+		this.setSpeed(3);
 		this.setUserContolled(false);
 		this.posTopTube = new Vector2(x, rand.nextInt(FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
 		this.posBotTube = new Vector2(x, this.posTopTube.y - TUBE_GAP - this.bottomTube.getHeight());
@@ -49,6 +49,15 @@ public class Tubes extends Entities {
 		this.posBotTube.x = position;
 	}
 	
+	@Override
+	public float getWidth() {
+	    return topTube.getWidth(); // or bottomTube.getWidth(), assuming they are the same
+	}
+
+	@Override
+	public float getHeight() {
+	    return topTube.getHeight(); // Assuming you're checking collisions with one tube at a time
+	}	
 
 	
 	@Override
