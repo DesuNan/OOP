@@ -27,9 +27,9 @@ public class GameMaster extends ApplicationAdapter {
     private ShapeRenderer shapeRenderer;
     private EntityManager entityManager;
     private Tubes tubes;
-    private List<Entity> entityList;
     
-    public class TextureObject extends Entity {
+    /*
+    public class TextureObject extends Entities {
 
         private Texture texture;
         private boolean aiControlled;
@@ -69,13 +69,13 @@ public class GameMaster extends ApplicationAdapter {
             }
         }
         
-/*
+
        @Override
         public void draw(ShapeRenderer shapeRenderer) {
             shapeRenderer.setColor(Color.WHITE);
             shapeRenderer.rect(x, y, texture.getWidth(), texture.getHeight());
         }
-       */
+       
        @Override
        public void draw() {
            
@@ -85,6 +85,7 @@ public class GameMaster extends ApplicationAdapter {
             texture.dispose();
         }
     }
+    */
 
     @Override
     public void create() {
@@ -98,9 +99,8 @@ public class GameMaster extends ApplicationAdapter {
     public void render() {
        ScreenUtils.clear(0, 1, 0.2f, 1);
        entityManager.draw();
-    
-       
-        
+       entityManager.moveAIControlled();
+       entityManager.moveUserControlled();
     }
 
     @Override

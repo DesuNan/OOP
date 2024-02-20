@@ -2,6 +2,8 @@ package com.mygdx.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -28,6 +30,7 @@ public class EntityManager implements iMovable {
     public void draw() {
     	for (Entities entity: entityList) {
     		entity.draw();
+    	
     	}
     }
     
@@ -36,6 +39,30 @@ public class EntityManager implements iMovable {
     		entity.dispose();
     	}
     }
+
+	@Override
+	public void moveAIControlled() {
+		// TODO Auto-generated method stub
+		for (Entities entity: entityList) {
+    		// if ai controlled
+			if(entity.isUserControlled() == false) {
+				entity.move();
+			}
+    	}
+		
+	}
+
+	@Override
+	public void moveUserControlled() {
+		// TODO Auto-generated method stub'
+		for (Entities entity: entityList) {
+    		// if not ai controlled
+			if(entity.isUserControlled() == true) {
+				entity.move();
+			}
+    	}
+		
+	}
     
   
     

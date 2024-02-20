@@ -22,7 +22,8 @@ public class Tubes extends Entities {
 		this.topTube = new Texture("toptube.png");
 		this.bottomTube = new Texture("bottomtube.png");
 		this.rand = new Random();
-		
+		this.setSpeed(10);
+		this.setUserContolled(false);
 		this.posTopTube = new Vector2(x, rand.nextInt(FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
 		this.posBotTube = new Vector2(x, this.posTopTube.y - TUBE_GAP - this.bottomTube.getHeight());
 	}
@@ -39,6 +40,17 @@ public class Tubes extends Entities {
 	public Vector2 getPosBottomTube() {
 		return this.posBotTube;
 	}
+	
+	public void setXPosTopTube(float position) {
+		this.posTopTube.x = position;
+	}
+	
+	public void setXPosBottomTube(float position) {
+		this.posBotTube.x = position;
+	}
+	
+
+	
 	@Override
 	public void draw() {
 		
@@ -47,6 +59,14 @@ public class Tubes extends Entities {
         this.batch.draw(this.getBottomTube(), this.getPosBottomTube().x, this.getPosBottomTube().y);
         this.batch.end();
         
+	}
+	
+	@Override
+	public void move() {
+		System.out.println("x: "+ this.getX());
+		System.out.println("speed: "+  this.getSpeed());
+		this.setXPosBottomTube(this.getPosBottomTube().x - this.getSpeed());
+		this.setXPosTopTube(this.getPosTopTube().x - this.getSpeed());
 	}
 	
 	@Override
