@@ -19,11 +19,6 @@ public class CircleObject extends Entity {
     }
 
     @Override
-    public void draw(ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(color);
-        shapeRenderer.circle(x, y, radius);
-    }
-    @Override
     public void draw() {
         
     }

@@ -36,6 +36,24 @@ public class EntityManager implements iMovable {
     		entity.dispose();
     	}
     }
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moveAIControlled() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moveUserControlled() {
+		// TODO Auto-generated method stub
+		
+	}
     
   
     

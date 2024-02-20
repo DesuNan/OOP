@@ -28,11 +28,6 @@ public class RectangleObject extends Entity {
 	}
 	
 	@Override
-    public void draw(ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(color);
-        shapeRenderer.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-    }
-	@Override
     public void draw() {
         
     }
