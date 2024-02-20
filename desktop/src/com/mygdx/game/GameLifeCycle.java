@@ -17,6 +17,7 @@ public class GameLifeCycle extends ApplicationAdapter{
 private GameState GameStatus;
 private EntityManager EntityManager;
 private SceneManager SceneManager;
+private GameClock clock;
 
 private SpriteBatch batch;
 private BitmapFont font;
@@ -44,12 +45,12 @@ public void updateStatus (GameState status) {
 
 @Override
 public void create() {
+
 	this.clock = new GameClock();	
 	batch = new SpriteBatch();
 	font = new BitmapFont();
-	
-	
-	
+  
+	this.clock = new GameClock();
 }
 
 @Override
@@ -65,7 +66,7 @@ public void render() {
 	this.batch.begin();
 	this.font.draw(this.batch, SceneManager.getCurrentScene().getName(), 20,100);
 	this.batch.end();
-	
+
 	
 }
 
@@ -74,6 +75,7 @@ public void dispose() {
 	this.clock.dispose();	
 	this.batch.dispose();
 	this.font.dispose();
+
 }
 
 }
