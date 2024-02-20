@@ -41,6 +41,7 @@ public class EntityManager implements iMovable {
     }
 
 	@Override
+<<<<<<< HEAD
 	public void moveAIControlled() {
 		// TODO Auto-generated method stub
 		for (Entities entity: entityList) {
@@ -49,11 +50,22 @@ public class EntityManager implements iMovable {
 				entity.move();
 			}
     	}
+=======
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moveAIControlled() {
+		// TODO Auto-generated method stub
+>>>>>>> 82ce8dad31d684482c1171c356dddba1cbf134e9
 		
 	}
 
 	@Override
 	public void moveUserControlled() {
+<<<<<<< HEAD
 		// TODO Auto-generated method stub'
 		for (Entities entity: entityList) {
     		// if not ai controlled
@@ -61,6 +73,9 @@ public class EntityManager implements iMovable {
 				entity.move();
 			}
     	}
+=======
+		// TODO Auto-generated method stub
+>>>>>>> 82ce8dad31d684482c1171c356dddba1cbf134e9
 		
 	}
     
