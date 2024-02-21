@@ -1,14 +1,12 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 abstract public class Entities {
 	private float x;
     private float y;
     private float speed;
-    private float velocityY;
     private boolean userControlled;
     
     
@@ -44,6 +42,8 @@ abstract public class Entities {
     public void setUserContolled(boolean userControlled) {
          this.userControlled = userControlled;
     }
+    
+    // For Collision Checker. Determines boolean if borders of entities overlap.
     public boolean isCollided(Entities entity) {
     	return this.getX() < entity.getX() + entity.getWidth() &&
     			this.getX() + this.getWidth() > entity.getX() &&
@@ -51,23 +51,8 @@ abstract public class Entities {
     			this.getY() + this.getHeight() > entity.getY();
     }
     
-    /*
-    public void move() {
-        if (userControlled) {
-            moveUserControlled();
-        } else {
-            moveAIControlled();
-        }
-    }*/
     
     abstract public void move();
-    /*
-    public void moveAIControlled() {
-    	// Implement AI-controlled movement logic for TextureObject
-        // Update the x and y positions based on AI-controlled movement
-        y += Gdx.graphics.getDeltaTime() * speed;
-    }
-*/
     abstract public void draw(SpriteBatch batch);
     abstract public void dispose(SpriteBatch batch);
    

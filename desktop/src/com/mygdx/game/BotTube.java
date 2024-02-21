@@ -11,10 +11,8 @@ public class BotTube extends Tubes {
 	public BotTube(float x, RandomGenerator rand) {
 		super(x, rand);
 		this.BotTubePic = new Texture("bottomtube.png");
-		
 		this.setX(x);
 		this.setY(this.getRandomNumberParent() + this.getLowestOpening() - this.getHeight());
-		System.out.println("RandomNumber btm :" + this.getRandomNumberParent());
 		
 	}
 	

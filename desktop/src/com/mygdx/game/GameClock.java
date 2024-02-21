@@ -15,6 +15,8 @@ public class GameClock {
     public GameClock() {
     	batch = new SpriteBatch();
         font = new BitmapFont();
+        
+        // Increases the timer by 1 every 1000 miliseconds.
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -22,10 +24,11 @@ public class GameClock {
             }
         });
     }
+    // Start Clock
     public void start() {
         timer.start();
     }
-
+    // Stop Clock
     public void stop() {
         timer.stop();
     }
@@ -33,14 +36,14 @@ public class GameClock {
     public int getElapsedTime() {
         return elapsedTime;
     }
-    
+   
     public void resetClock () {
     	this.elapsedTime = 0;
     	if (timer.isRunning()) {
     		timer.stop();
     	}
     }
-    
+    // Draws the clock at position 10,20
     public void draw () {
     	text = "Game Time: " + this.elapsedTime;
     	this.batch.begin();

@@ -8,7 +8,7 @@ public class SceneManager {
 	private GameState currentStatus;
 	
 	
-	
+	// Saves Scenes in a stack, reading the top of the stack.
 	public SceneManager(){
 		scenes = new Stack<Scene>();
 		

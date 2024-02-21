@@ -1,26 +1,12 @@
 package com.mygdx.game;
 
-import java.util.Random;
-import java.util.List;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 
-import com.mygdx.game.CollisionManager;
-import com.mygdx.game.Entities;
-import com.mygdx.game.EntityManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
-import java.util.ArrayList;
 
 
 public class GameLifeCycle extends ApplicationAdapter {
@@ -55,7 +41,9 @@ public class GameLifeCycle extends ApplicationAdapter {
 
 	@Override
 	public void render() {
+		// update gamestate status according to scene
 		this.updateStatus(sm.getCurrentGameStatus());
+		
 		// Clear screen each time before drawing
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		sm.update(Gdx.graphics.getDeltaTime());
@@ -63,7 +51,7 @@ public class GameLifeCycle extends ApplicationAdapter {
 		this.clock.draw();
 		
 		
-		
+		// Check GameState and communicate with clock
 		if (this.GameStatus == GameState.Start) {
 			this.clock.resetClock();
 		}

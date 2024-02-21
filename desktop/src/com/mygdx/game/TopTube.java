@@ -15,7 +15,6 @@ public class TopTube extends Tubes {
 		
 		this.setX(x);
 		this.setY(this.getRandomNumberParent() + this.getTubeGap() + this.getLowestOpening());
-		System.out.println("RandomNumber top:" + this.getRandomNumberParent());
 		
 	}
 	
