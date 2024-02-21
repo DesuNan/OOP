@@ -20,6 +20,7 @@ public class PlayScene extends Scene {
 		entityManager = new EntityManager();
 		entityManager.addEntity(new Bird(100, 100));
 		collisionManager = new CollisionManager(sm, batch);
+		this.updateGameStatus(GameState.Play);
 
 		TUBE_END = TUBE_START + (TUBE_COUNT - 1) * TUBE_SPACING;
 

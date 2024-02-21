@@ -10,6 +10,7 @@ public abstract class Scene {
     public Scene(SceneManager sm, SpriteBatch batch) {
     	this.sm = sm;
     	this.batch = batch;
+    	
     }
     
     protected abstract void handleInput();

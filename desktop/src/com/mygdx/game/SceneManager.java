@@ -5,11 +5,21 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SceneManager {
 	private Stack<Scene> scenes; 
+	private GameState currentStatus;
+	
 	
 	
 	public SceneManager(){
 		scenes = new Stack<Scene>();
 		
+	}
+	
+	public GameState getCurrentGameStatus() {
+		return this.currentStatus;
+	}
+	
+	public void updateCurrentGameStatus(GameState gameStatus) {
+		this.currentStatus = gameStatus;
 	}
 	
 	public void push(Scene scene) {
@@ -23,6 +33,7 @@ public class SceneManager {
 	public void set(Scene scene) {
 		scenes.pop();
 		scenes.push(scene);
+		this.currentStatus = scene.getGameStatus();
 	}
 	
 	public void update(float dt) {

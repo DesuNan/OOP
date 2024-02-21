@@ -11,6 +11,7 @@ public class StartScene extends Scene {
 		super(sm, batch);
 		background = new Texture("bg.png");
 		startMessage = new Texture("message.png");
+		this.updateGameStatus(GameState.Start);
 	}
 	
 	

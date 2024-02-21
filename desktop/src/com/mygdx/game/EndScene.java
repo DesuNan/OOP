@@ -9,6 +9,7 @@ public class EndScene extends Scene {
 	
 	public EndScene (SceneManager sm, SpriteBatch batch) {
 		super(sm, batch);
+		this.updateGameStatus(GameState.End);
 		background = new Texture("bg.png");
 		gameover = new Texture("gameover.png");
 	}
