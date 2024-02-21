@@ -44,6 +44,13 @@ abstract public class Entities {
     public void setUserContolled(boolean userControlled) {
          this.userControlled = userControlled;
     }
+    public boolean isCollided(Entities entity) {
+    	return this.getX() < entity.getX() + entity.getWidth() &&
+    			this.getX() + this.getWidth() > entity.getX() &&
+    			this.getY() < entity.getY() + entity.getHeight() &&
+    			this.getY() + this.getHeight() > entity.getY();
+    }
+    
     /*
     public void move() {
         if (userControlled) {

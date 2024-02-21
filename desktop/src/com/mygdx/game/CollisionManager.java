@@ -18,7 +18,9 @@ public class CollisionManager implements iCollision {
 	}
 	
     @Override
-    public boolean isCollided(Bird bird, Tubes tubes) {
+    public boolean isCollided(Entities entity1, Entities entity2) {
+    	return entity1.isCollided(entity2);
+    	/*
         boolean collisionWithTopTube = bird.getX() < tubes.getPosTopTube().x + tubes.getTopTube().getWidth() &&
                                        bird.getX() + bird.getWidth() > tubes.getPosTopTube().x &&
                                        bird.getY() < tubes.getPosTopTube().y + tubes.getTopTube().getHeight() &&
@@ -30,6 +32,7 @@ public class CollisionManager implements iCollision {
                                           bird.getY() + bird.getHeight() > tubes.getPosBottomTube().y;
 
         return collisionWithTopTube || collisionWithBottomTube;
+        */
     }
 
 
@@ -49,11 +52,7 @@ public class CollisionManager implements iCollision {
         if (bird != null) {
             for (Tubes tubes : tubesList) {
                 if (isCollided(bird, tubes)) {
-                	System.out.println(bird.getX());
-                	System.out.println(bird.getY());
-                	System.out.println(tubes.getPosBottomTube().x);
                 	sm.set(new EndScene(sm, batch));
-                    
                 }
             }
         }

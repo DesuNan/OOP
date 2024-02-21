@@ -24,7 +24,10 @@ public class PlayScene extends Scene {
 		TUBE_END = TUBE_START + (TUBE_COUNT - 1) * TUBE_SPACING;
 
 		for (int i = 1; i < TUBE_COUNT; i++) {
-			entityManager.addEntity(new Tubes(TUBE_START + i * TUBE_SPACING));
+			
+			RandomGenerator rand = new RandomGenerator(123);
+			entityManager.addEntity(new TopTube(TUBE_START + i * TUBE_SPACING, rand));
+			entityManager.addEntity(new BotTube(TUBE_START + i * TUBE_SPACING, rand));
 		}
 	}
 	
