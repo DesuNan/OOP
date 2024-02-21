@@ -5,8 +5,8 @@ public class RandomGenerator implements iRandomGenerator {
 	private static final int FLUCTUATION = 130;
 	
 	private Random random;
-	public RandomGenerator (long x) {
-		this.random = new Random(x);
+	public RandomGenerator () {
+		this.random = new Random();
 	}
 	
 	@Override 

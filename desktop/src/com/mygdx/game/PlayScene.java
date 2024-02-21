@@ -25,7 +25,7 @@ public class PlayScene extends Scene {
 
 		for (int i = 1; i < TUBE_COUNT; i++) {
 			
-			RandomGenerator rand = new RandomGenerator(123);
+			RandomGenerator rand = new RandomGenerator();
 			entityManager.addEntity(new TopTube(TUBE_START + i * TUBE_SPACING, rand));
 			entityManager.addEntity(new BotTube(TUBE_START + i * TUBE_SPACING, rand));
 		}
