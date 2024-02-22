@@ -1,7 +1,7 @@
 package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public abstract class Scene {
+public abstract class Scene implements iInput {
 	private GameState GameStatus;
 	protected SceneManager sm;
 	protected SpriteBatch batch;
@@ -12,7 +12,8 @@ public abstract class Scene {
     	
     }
     
-    protected abstract void handleInput();
+    @Override
+    public abstract void handleInput();
     
     public abstract void update(float dt);
     

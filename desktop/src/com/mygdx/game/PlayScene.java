@@ -42,7 +42,6 @@ public class PlayScene extends Scene {
 	@Override
 	public void update(float dt) {
 		handleInput();
-
 	}
 	
 	@Override
