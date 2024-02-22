@@ -10,8 +10,7 @@ abstract public class Entities {
     private boolean userControlled;
     
     
-    public abstract float getWidth();
-    public abstract float getHeight();
+   
 
     public float getX() {
         return this.x;
@@ -55,5 +54,7 @@ abstract public class Entities {
     abstract public void move();
     abstract public void draw(SpriteBatch batch);
     abstract public void dispose(SpriteBatch batch);
+    public abstract float getWidth();
+    public abstract float getHeight();
    
 }

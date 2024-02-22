@@ -38,10 +38,10 @@ public class GameClock {
     }
    
     public void resetClock () {
-    	this.elapsedTime = 0;
     	if (timer.isRunning()) {
     		timer.stop();
     	}
+    	this.elapsedTime = 0;
     }
     // Draws the clock at position 10,20
     public void draw () {

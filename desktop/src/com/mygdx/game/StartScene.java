@@ -14,8 +14,6 @@ public class StartScene extends Scene {
 		this.updateGameStatus(GameState.Start);
 	}
 	
-	
-	
 	@Override
 	public void update(float dt) {
 		handleInput();

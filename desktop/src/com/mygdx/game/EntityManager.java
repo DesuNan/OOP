@@ -12,8 +12,6 @@ public class EntityManager implements iMovable {
 	
 	
     private List<Entities> entityList;
-    private CollisionManager CollisionManager;
-    private Bird bird;
     
 
     public EntityManager() {
@@ -27,10 +25,13 @@ public class EntityManager implements iMovable {
         entityList.add(entity);
     }
     
+    public void deleteEntity(Entities entity) {
+    	entityList.remove(entity);
+    }
+    
     public void draw(SpriteBatch batch) {
     	for (Entities entity: entityList) {
-    		entity.draw(batch);
-    	
+    		entity.draw(batch);	
     	}
     }
     

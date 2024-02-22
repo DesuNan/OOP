@@ -2,7 +2,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class Scene {
-	private String AudioPath;
 	private GameState GameStatus;
 	protected SceneManager sm;
 	protected SpriteBatch batch;
@@ -21,17 +20,11 @@ public abstract class Scene {
     
     public abstract void dispose(SpriteBatch batch);
 	
-	public String getAudio() {
-		return this.AudioPath;
-	}
 	
 	public GameState getGameStatus() {
 		return this.GameStatus;
 	}
 	
-	public void updateAudio (String Audio) {
-		this.AudioPath = Audio;
-	}
 	
 	public void updateGameStatus (GameState Status) {
 		this.GameStatus = Status;

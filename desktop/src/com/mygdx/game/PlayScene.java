@@ -12,13 +12,15 @@ public class PlayScene extends Scene {
 	private Texture background;
 	private EntityManager entityManager;
 	private CollisionManager collisionManager;
+
 	
 	
 	public PlayScene (SceneManager sm, SpriteBatch batch) {
 		super(sm, batch);
 		background = new Texture("bg.png");
-		entityManager = new EntityManager();
+		entityManager = sm.getEntityManager();
 		entityManager.addEntity(new Bird(100, 100));
+		
 		collisionManager = new CollisionManager(sm, batch);
 		this.updateGameStatus(GameState.Play);
 

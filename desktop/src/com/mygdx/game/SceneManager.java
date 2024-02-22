@@ -6,12 +6,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class SceneManager {
 	private Stack<Scene> scenes; 
 	private GameState currentStatus;
-	
+	private EntityManager entityManager;
 	
 	// Saves Scenes in a stack, reading the top of the stack.
 	public SceneManager(){
 		scenes = new Stack<Scene>();
-		
+		this.entityManager = new EntityManager();
+	}
+	
+	public EntityManager getEntityManager() {
+		return this.entityManager;
+	}
+	
+	public void setEntityManager(EntityManager em) {
+		this.entityManager = em;
 	}
 	
 	public GameState getCurrentGameStatus() {

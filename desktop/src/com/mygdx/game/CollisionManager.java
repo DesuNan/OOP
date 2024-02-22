@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.EntityManager;
 
 public class CollisionManager implements iCollision {
-	protected SceneManager sm;
-	protected SpriteBatch batch;
+	private SceneManager sm;
+	private SpriteBatch batch;
 	
 	public CollisionManager (SceneManager sm, SpriteBatch batch) {
 		this.sm = sm;
@@ -22,7 +22,7 @@ public class CollisionManager implements iCollision {
     	return entity1.isCollided(entity2);
     }
 
-
+    @Override
     public void handleCollisions(List<Entities> entities) {
         Bird bird = null;
         List<Tubes> tubesList = new ArrayList<>();
@@ -36,6 +36,7 @@ public class CollisionManager implements iCollision {
         }
 
         // Check collisions between bird and each tube
+        // If Collided, scenemanager change scene.
         if (bird != null) {
             for (Tubes tubes : tubesList) {
                 if (isCollided(bird, tubes)) {

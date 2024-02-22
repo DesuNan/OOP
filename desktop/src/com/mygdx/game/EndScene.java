@@ -17,8 +17,7 @@ public class EndScene extends Scene {
 	@Override
 	public void handleInput() {
 		if(Gdx.input.justTouched()) {
-			sm.set(new PlayScene(sm, batch));
-			dispose(batch);
+			System.exit(0);
 		}
 	}
 	
