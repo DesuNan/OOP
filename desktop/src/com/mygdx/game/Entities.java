@@ -42,15 +42,6 @@ abstract public class Entities {
          this.userControlled = userControlled;
     }
     
-    // For Collision Checker. Determines boolean if borders of entities overlap.
-    public boolean isCollided(Entities entity) {
-    	return this.getX() < entity.getX() + entity.getWidth() &&
-    			this.getX() + this.getWidth() > entity.getX() &&
-    			this.getY() < entity.getY() + entity.getHeight() &&
-    			this.getY() + this.getHeight() > entity.getY();
-    }
-    
-    
     abstract public void move();
     abstract public void draw(SpriteBatch batch);
     abstract public void dispose(SpriteBatch batch);
