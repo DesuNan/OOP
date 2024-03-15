@@ -1,17 +1,39 @@
 package com.mygdx.game;
 import java.util.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
+import InputOutput.*;
+import Player.*;
 
 public class SceneManager {
 	private Stack<Scene> scenes; 
+	private Stack<iInput> iInputs;
 	private GameState currentStatus;
 	private EntityManager entityManager;
+	private InputOutputManager ioman;
+	private PlayersManager playerManager;
+	private CollisionManager collisionManager;
 	
 	// Saves Scenes in a stack, reading the top of the stack.
-	public SceneManager(){
+	public SceneManager(InputOutputManager ioman){
+		this.ioman = ioman;
 		scenes = new Stack<Scene>();
-		this.entityManager = new EntityManager();
+		this.iInputs = new Stack<iInput>();
+		this.collisionManager = new CollisionManager(this);
+		this.entityManager = new EntityManager(ioman, collisionManager);
+		this.playerManager = new PlayersManager(ioman, collisionManager);
+		
+		
+	
+	}
+	public CollisionManager getCollisionManager() {
+		return this.collisionManager;
+	}
+	public InputOutputManager getIOMan() {
+		return this.ioman;
+	}
+	
+	public PlayersManager getPlayerManager() {
+		return this.playerManager;
 	}
 	
 	public EntityManager getEntityManager() {
@@ -32,15 +54,19 @@ public class SceneManager {
 	
 	public void push(Scene scene) {
 		scenes.push(scene);
+		if (scene instanceof iInput) {
+        	iInputs.push((iInput) scene);
+        }
 	}
 	
 	public void pop() {
 		scenes.pop();
+		iInputs.pop();
 	}
 	
 	public void set(Scene scene) {
-		scenes.pop();
-		scenes.push(scene);
+		this.pop();
+		this.push(scene);
 		this.currentStatus = scene.getGameStatus();
 	}
 	
@@ -48,7 +74,7 @@ public class SceneManager {
 		scenes.peek().update(dt);
 	}
 	
-	public void render(SpriteBatch batch) {
-		scenes.peek().render(batch);
+	public void render() {
+		scenes.peek().render(this);
 	}
 }

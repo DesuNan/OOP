@@ -7,28 +7,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 
 public class Bird extends Entities{
-	private static final int GRAVITY = -15;
-	private Vector3 position;
-	private Vector3 velocity;
+
 	private Texture bird;
 	
-	public Bird(int x, int y) {
-		position = new Vector3(x, y, 0);
-		velocity = new Vector3(0,0,0);
-		this.setUserContolled(true);
+	public Bird(float x, float y) {
+		this.setX(x);
+		this.setY(y);
+		
 		this.setSpeed(250);
 		bird = new Texture("bird.png");
 	}
 	
-	public void update(float dt) {
-		velocity.add(0, GRAVITY, 0);
-		velocity.scl(dt);
-		position.add(0, velocity.y, 0);
-		velocity.scl(1/dt);
-	}
-	public Vector3 getPosition() {
-		return position;
-	}
 	public Texture getBird() {
 		return bird;
 	}
@@ -44,23 +33,13 @@ public class Bird extends Entities{
 	}
 	
 	@Override
-	public void move() {
-		
-		if (Gdx.input.isKeyPressed(Keys.UP)) {
-        	this.setY(this.getY() + Gdx.graphics.getDeltaTime() * this.getSpeed());
-        }
-		if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-        	this.setY(this.getY() - Gdx.graphics.getDeltaTime() * this.getSpeed());
-        }
-    }
-	@Override
-	public void draw(SpriteBatch batch) {
-		batch.draw(this.getBird(), this.getX(), this.getY());
+	public void draw(EntityManager em) {
+		em.getIOMan().getBatch().draw(this.getBird(), this.getX(), this.getY());
 	}
 	
 	
 	@Override
-	public void dispose(SpriteBatch batch) {
-		batch.dispose();
+	public void dispose(EntityManager em) {
+		em.getIOMan().disposeBatch();
 	}
 }

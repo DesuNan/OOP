@@ -2,11 +2,12 @@ package com.mygdx.game;
 
 
 import com.badlogic.gdx.ApplicationAdapter;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
+import InputOutput.*;
 
 
 public class GameLifeCycle extends ApplicationAdapter {
@@ -16,6 +17,7 @@ public class GameLifeCycle extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private GameClock clock;
 	private GameState GameStatus;
+	private InputOutputManager ioman;
 	
 	public GameLifeCycle () {
 		this.GameStatus = GameState.Start;
@@ -31,10 +33,12 @@ public class GameLifeCycle extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-		batch = new SpriteBatch();
-		sm = new SceneManager();
+		this.ioman = new InputOutputManager();
+		this.ioman.createBatch();
+		
+		sm = new SceneManager(ioman);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
-		sm.push(new StartScene(sm, batch));
+		sm.push(new StartScene(sm));
 		this.clock = new GameClock();	
 		
 	}
@@ -42,6 +46,12 @@ public class GameLifeCycle extends ApplicationAdapter {
 	@Override
 	public void render() {
 		// update gamestate status according to scene
+		this.ioman.startBatch();
+		this.sm.render();
+		this.sm.update(Gdx.graphics.getDeltaTime());
+		this.ioman.stopBatch();
+		
+		/*
 		this.updateStatus(sm.getCurrentGameStatus());
 		
 		// Clear screen each time before drawing
@@ -61,12 +71,13 @@ public class GameLifeCycle extends ApplicationAdapter {
 		else if (this.GameStatus == GameState.End) {
 			this.clock.stop();
 		}
-		
+		*/
 
 	}
 
 	@Override
 	public void dispose() {
 		this.clock.dispose();	
+		this.ioman.disposeBatch();
 	}
 }

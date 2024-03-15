@@ -52,6 +52,18 @@ public class InputOutputManager extends InputAdapter{
 	  public Texture getImage(String path) {
 	    return new Texture(path);
 	  }
+	  
+	  public float getWidth(String path) {
+		  return this.getImage(path).getWidth();
+	  }
+	  
+	  public float getHeight(String path) {
+		  return this.getImage(path).getHeight();
+	  }
+	  
+	  public boolean isTouched() {
+		  return Gdx.input.justTouched();
+	  }
 	 
 	 public boolean isKeyPressed(int keycode) {
 	        return keysPressed.contains(keycode);
@@ -61,39 +73,12 @@ public class InputOutputManager extends InputAdapter{
 	        keysPressed.clear();
 	    }
 	 
-	
-	
 	@Override
 	public boolean keyDown(int keycode) {
+		keysPressed.add(keycode);
+		// System.out.println("Key typed: Listen "+keycode);
+		return false;
 		
-		keysPressed.add(keycode);
-		System.out.println("Key typed: Listen "+keycode);
-		return false;
-		/*
-		if(isKeyPressed(keycode)) { // Change this to the key you want to listen for
-            c
-            return true; // Return true to indicate the event has been handled
-        }
-		return false;
-		*/
-		// TODO Auto-generated method stub
-		/*
-		keyHeldDown = true;
-		System.out.println("Key typed: Listen");
-		keysPressed.add(keycode);
-		for (playerMoveable imoveable: pm.getAllMoveables()) {
-			imoveable.handleMovement(keycode, isKeyPressed(keycode));
-			
-		}
-        return false;
-        
-        */
-		/*float deltaTime = Gdx.graphics.getDeltaTime();
-		for (playerMoveable imoveable: pm.getAllMoveables()) {
-			imoveable.handleMovement(keycode, deltaTime);
-			
-		}
-		return false;*/
 	}
 	@Override
 	public boolean keyUp(int keycode) {
@@ -101,20 +86,9 @@ public class InputOutputManager extends InputAdapter{
 		keysPressed.remove(keycode);
 		
         return false;
-		// TODO Auto-generated method stub
-		/*
-		System.out.println("Key up: " + (keycode));
-		return false;*/
+		
 	}
-	/*
-	@Override
-	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		System.out.println("Key typed: Listen");
-		System.out.println("Key typed: " + character);
-		return false;
-	}
-	*/
+	
 
 	  
 }

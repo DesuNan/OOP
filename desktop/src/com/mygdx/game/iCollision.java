@@ -6,6 +6,10 @@ import com.mygdx.game.Entities;
 
 // Collsion interface between entities.
 public interface iCollision {
-    boolean isCollided(Entities entity1, Entities entity2);
-    void handleCollisions(List<Entities> entities);
+   /* boolean isCollided(Entities entity1, Entities entity2);
+    void handleCollisions(List<Entities> entities);*/
+	public float getX();
+    public float getY();
+    public float getWidth();
+    public float getHeight();
 }

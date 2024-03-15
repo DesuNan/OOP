@@ -3,16 +3,15 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class BotTube extends Tubes {
+public class BotTube extends Entities {
 	private Texture BotTubePic;
-	private SpriteBatch batch = new SpriteBatch();
 	
-	
-	public BotTube(float x, RandomGenerator rand) {
-		super(x, rand);
+	public BotTube(float x, float y, float speed) {
+		
 		this.BotTubePic = new Texture("bottomtube.png");
 		this.setX(x);
-		this.setY(this.getRandomNumberParent() + this.getLowestOpening() - this.getHeight());
+		this.setY(y);
+		this.setSpeed(speed);
 		
 	}
 	
@@ -34,21 +33,26 @@ public class BotTube extends Tubes {
 	}	
 	
 	@Override
-	public void draw(SpriteBatch batch) {
+	public void draw(EntityManager em) {
 		
-		this.batch.begin();
-        this.batch.draw(this.getBotTube(), this.getX(), this.getY());
-        this.batch.end();
+		em.getIOMan().getBatch().draw(this.getBotTube(), this.getX(), this.getY());
         
 	}
-	
+	/*
 	@Override
 	public void move() {
 		this.setX(this.getX() - this.getSpeed());
 	}
-	
+	*/
 	@Override
-	public void dispose(SpriteBatch batch) {
-		this.batch.dispose();
+	public void dispose(EntityManager em) {
+		// this.batch.dispose();
+		em.getIOMan().disposeBatch();
+	}
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		this.setX(this.getX() - this.getSpeed());
 	}
 }

@@ -19,7 +19,7 @@ public class GameLifeCycle2 extends ApplicationAdapter {
 		this.pm = new PlayersManager(ioman);
 		ioman.createBatch();
 		
-		pm.addPlayer(new Players(100,100,2,"bucket.png"));
+		pm.addPlayer(new Players(100,100,12,"bucket.png"));
 		
 	}
 	

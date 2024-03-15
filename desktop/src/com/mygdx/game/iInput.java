@@ -1,5 +1,5 @@
 package com.mygdx.game;
 
 public interface iInput {
-public void handleInput();
+	public void handleInput(SceneManager sm);
 }

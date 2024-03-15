@@ -7,45 +7,57 @@ import com.mygdx.game.iCollision;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.EntityManager;
+import Player.*;
 
-public class CollisionManager implements iCollision {
+
+public class CollisionManager {
 	private SceneManager sm;
-	private SpriteBatch batch;
+	private List<iCollision> collidables;
 	
-	public CollisionManager (SceneManager sm, SpriteBatch batch) {
+	public CollisionManager (SceneManager sm) {
 		this.sm = sm;
-		this.batch = batch;
+		this.collidables = new ArrayList<>();
+		
 	}
 	
-    @Override
-    public boolean isCollided(Entities entity1, Entities entity2) {
+	public List<iCollision> getCollidablesList () {
+		return this.collidables;
+	}
+	
+	public void addCollidable(iCollision collidable) {
+        collidables.add(collidable);
+    }
+	public void deleteCollidable(iCollision collidable) {
+        collidables.remove(collidable);
+    }
+	
+    public boolean isCollided(iCollision entity1, iCollision entity2) {
     	return entity1.getX() < entity2.getX() + entity2.getWidth() &&
     			entity1.getX() + entity1.getWidth() > entity2.getX() &&
     			entity1.getY() < entity2.getY() + entity2.getHeight() &&
     			entity1.getY() + entity1.getHeight() > entity2.getY();
     }
+    
 
-    @Override
-    public void handleCollisions(List<Entities> entities) {
-        Bird bird = null;
-        List<Tubes> tubesList = new ArrayList<>();
-
-        for (Entities entity : entities) {
-            if (entity instanceof Bird) {
-                bird = (Bird) entity;
-            } else if (entity instanceof Tubes) {
-                tubesList.add((Tubes) entity);
-            }
+    public void handleCollisions() {
+        Players player = null;
+        List<Entities> entityList = new ArrayList<>();
+        for (iCollision collidable: this.collidables) {
+        	if (collidable instanceof Players) {
+        		player = (Players) collidable;
+        	}
+        	else if (collidable instanceof Entities) {
+        		entityList.add((Entities) collidable);
+        	}
         }
-
-        // Check collisions between bird and each tube
-        // If Collided, scenemanager change scene.
-        if (bird != null) {
-            for (Tubes tubes : tubesList) {
-                if (isCollided(bird, tubes)) {
-                	sm.set(new EndScene(sm, batch));
-                }
-            }
+     // Check collisions between bird and each tube
+     // If Collided, scenemanager change scene.
+        if (player != null) {
+        	for (Entities entity: entityList) {
+        		if (isCollided(entity,player)) {
+        			sm.set(new EndScene(sm));
+        		}
+        	}
         }
     }
 

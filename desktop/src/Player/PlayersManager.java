@@ -2,18 +2,22 @@ package Player;
 
 import java.util.*;
 
+import com.mygdx.game.CollisionManager;
+import com.mygdx.game.iCollision;
+
 import InputOutput.InputOutputManager;
 
 public class PlayersManager{
 	private InputOutputManager ioman;
+	private CollisionManager cm;
 	private List<Players> players;
 	private List<playerMoveable> imovables;
 	
-	public PlayersManager (InputOutputManager ioman) {
+	public PlayersManager (InputOutputManager ioman, CollisionManager cm) {
 		this.ioman = ioman;
+		this.cm = cm;
 		this.players = new ArrayList<>();
 		this.imovables = new ArrayList<>();
-		
 		this.ioman.setPlayerManager(this);
 	}
 	
@@ -26,6 +30,9 @@ public class PlayersManager{
         players.add(player);
         if (player instanceof playerMoveable) {
             imovables.add((playerMoveable) player);
+        }
+        if(player instanceof iCollision) {
+        	cm.addCollidable((iCollision) player);
         }
     }
 
@@ -46,19 +53,17 @@ public class PlayersManager{
         return imovables;
     }
     
-    public void draw(InputOutputManager ioman) {
+    public void draw() {
     	for (Players players: players) {
-    		ioman.getBatch().draw(ioman.getImage(players.getImage()),players.getX(),players.getY());
+    		this.ioman.getBatch().draw(this.ioman.getImage(players.getImage()),players.getX(),players.getY());
     	}
+    	this.handleInput(ioman);
     }
     
-    public void handleInput(InputOutputManager ioman, float dt) {
-    	
+    public void handleInput(InputOutputManager ioman) {
     	for (playerMoveable imove: imovables) {
-    		imove.handleMovement(ioman, dt);
+    		imove.handleMovement(ioman);
     	}
     }
-    
-	
-	
+   
 }

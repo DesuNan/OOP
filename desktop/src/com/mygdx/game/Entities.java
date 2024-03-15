@@ -1,16 +1,11 @@
 package com.mygdx.game;
-
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-abstract public class Entities {
+abstract public class Entities implements iMovable, iCollision {
+	protected EntityManager em;
 	private float x;
     private float y;
     private float speed;
-    private boolean userControlled;
-    
-    
-   
 
     public float getX() {
         return this.x;
@@ -35,17 +30,9 @@ abstract public class Entities {
     public void setSpeed(float speed) {
         this.speed = speed;
     }
-    public boolean isUserControlled() {
-        return this.userControlled;
-    }
-    public void setUserContolled(boolean userControlled) {
-         this.userControlled = userControlled;
-    }
     
-    abstract public void move();
-    abstract public void draw(SpriteBatch batch);
-    abstract public void dispose(SpriteBatch batch);
-    public abstract float getWidth();
-    public abstract float getHeight();
+    abstract public void draw(EntityManager em);
+    abstract public void dispose(EntityManager em);
+
    
 }

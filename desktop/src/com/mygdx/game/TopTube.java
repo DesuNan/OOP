@@ -5,20 +5,18 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class TopTube extends Tubes {
+public class TopTube  extends Entities {
 	private Texture TopTubePic;
-	private SpriteBatch batch = new SpriteBatch();
 	
-	public TopTube(float x, RandomGenerator rand) {
-		super(x, rand);
+	public TopTube(float x, float y, float speed) {
+		
 		this.TopTubePic = new Texture("toptube.png");
 		
 		this.setX(x);
-		this.setY(this.getRandomNumberParent() + this.getTubeGap() + this.getLowestOpening());
+		this.setY(y);
+		this.setSpeed(speed);
 		
 	}
-	
-	
 	public Texture getTopTube() {
 		return this.TopTubePic;
 	}
@@ -36,12 +34,8 @@ public class TopTube extends Tubes {
 	}	
 	
 	@Override
-	public void draw(SpriteBatch batch) {
-		
-		this.batch.begin();
-		this.batch.draw(this.getTopTube(), this.getX(), this.getY());
-        this.batch.end();
-        
+	public void draw(EntityManager em) {
+		em.getIOMan().getBatch().draw(this.getTopTube(), this.getX(), this.getY());
 	}
 	
 	@Override
@@ -49,8 +43,10 @@ public class TopTube extends Tubes {
 		this.setX(this.getX() - this.getSpeed());
 	}
 	
+	
 	@Override
-	public void dispose(SpriteBatch batch) {
-		this.batch.dispose();
+	public void dispose(EntityManaager em) {
+		em.getIOMan().disposeBatch();
 	}
 }
+

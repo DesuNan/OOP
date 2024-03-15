@@ -1,43 +1,46 @@
 package com.mygdx.game;
-import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 
 public class StartScene extends Scene {
 	private Texture background;
 	private Texture startMessage;
 	
-	public StartScene (SceneManager sm, SpriteBatch batch) {
-		super(sm, batch);
-		background = new Texture("bg.png");
-		startMessage = new Texture("message.png");
+	
+	public StartScene (SceneManager sm) {
+		super(sm);
+		background = this.sm.getIOMan().getImage("bg.png");
+		startMessage = this.sm.getIOMan().getImage("message.png");
 		this.updateGameStatus(GameState.Start);
 	}
 	
 	@Override
-	public void update(float dt) {
-		handleInput();
-	}
-	
-	@Override
-	public void render(SpriteBatch batch) {
-		batch.begin();
-		batch.draw(background, 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
-		batch.draw(startMessage, (GameLifeCycle.WIDTH / 2) - (startMessage.getWidth() / 2), (GameLifeCycle.HEIGHT/2) - 100);
-		batch.end();
-	}
-	
-	@Override
-	public void handleInput() {
-		if(Gdx.input.justTouched()) {
-			sm.set(new PlayScene(sm, batch));
-			dispose(batch);
+	public void handleInput(SceneManager sm) {
+		// TODO Auto-generated method stub
+		if(sm.getIOMan().isTouched()) {
+			sm.set(new PlayScene(sm));
 		}
 	}
 	
 	@Override
-	public void dispose(SpriteBatch batch) {
-		startMessage.dispose();
+	public void update(float dt) {
+		this.handleInput(this.sm);
 	}
+	
+	@Override
+	public void render(SceneManager sm) {
+		sm.getIOMan().getBatch().draw(background, 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
+		sm.getIOMan().getBatch().draw(startMessage, (GameLifeCycle.WIDTH / 2) - (startMessage.getWidth() / 2), (GameLifeCycle.HEIGHT/2) - 100);
+		
+	}
+	
+	
+	@Override
+	public void dispose(SceneManager sm) {
+		this.sm.getIOMan().disposeBatch();
+	}
+
+	
 	
 }
