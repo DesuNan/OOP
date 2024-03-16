@@ -1,10 +1,14 @@
 package com.mygdx.game;
 import java.util.ArrayList;
+import Collision.*;
+import Scene.*;
 import java.util.List;
+import Entity.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 
 import Player.Players;
 import com.badlogic.gdx.Input;
@@ -23,12 +27,13 @@ public class PlayScene extends Scene {
 		super(sm);
 		this.sm = sm;
 		background = this.sm.getIOMan().getImage("bg.png");
+		// Set game State, for synchronisation
+		this.sm.getGameLifeCycle().updateStatus(GameState.Play);
 		
-		sm.getEntityManager().addEntity(new BotTube(800,50,5, "bottomtube.png"));
-		sm.getEntityManager().addEntity(new BotTube(800,500,5, "toptube.png"));
-		// sm.getEntityManager().addEntity(new TopTube(800,225,5));
 		sm.getPlayerManager().addPlayer(new Bird(100,100,12,"bird.png", new ArrayList<>(List.of(Input.Keys.UP))));
-		
+	
+		sm.getEntityManager().addEntity(new Tube(800 ,50,5, "bottomtube.png"));
+		sm.getEntityManager().addEntity(new Tube(800 ,500,5, "toptube.png"));
 		/*
 		entityManager = sm.getEntityManager();
 		entityManager.addEntity(new Bird(100, 100));
@@ -51,7 +56,6 @@ public class PlayScene extends Scene {
 	public void handleInput(SceneManager sm) {
 		// TODO Auto-generated method stub
 		if(sm.getIOMan().isTouched()) {
-			System.out.println("By, world!");
 			sm.set(new EndScene(sm));
 		}
 	}
@@ -64,20 +68,10 @@ public class PlayScene extends Scene {
 	@Override
 	public void render(SceneManager sm) {
 		sm.getIOMan().getBatch().draw(background, 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
+		
 		sm.getEntityManager().draw();
 		sm.getPlayerManager().draw();
 		sm.getCollisionManager().handleCollisions();
-		
-		
-		/*
-		batch.begin();
-		batch.draw(background, 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
-		entityManager.draw(batch);
-		entityManager.moveAIControlled();
-		entityManager.moveUserControlled();
-		collisionManager.handleCollisions(entityManager.getEntityList());
-		batch.end();
-		*/
 	}
 	
 	

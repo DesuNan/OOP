@@ -1,30 +1,24 @@
-package com.mygdx.game;
+package Entity;
 import java.util.ArrayList;
+import Collision.*;
 
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import InputOutput.InputOutputManager;
-import Player.playerMoveable;
 
-// EntityManager class
-// public class EntityManager implements iMovable {
-public class EntityManager {
+public class EntitiesManager {
 	
     private List<Entities> entityList;
-    private List<iMovable> imovables;
+    private List<aiMoveable> aiMoveables;
     private InputOutputManager ioman;
     private CollisionManager cm;
     
-    public EntityManager(InputOutputManager ioman, CollisionManager cm) {
+    public EntitiesManager(InputOutputManager ioman, CollisionManager cm) {
         this.ioman = ioman;
         this.cm = cm;
     	entityList = new ArrayList<>();
-    	this.imovables = new ArrayList<>();
+    	this.aiMoveables = new ArrayList<>();
         
     }
     
@@ -35,23 +29,25 @@ public class EntityManager {
     public List<Entities> getEntityList() {
     	return this.entityList;
     }
-    public List<iMovable> getAllMoveables() {
-        return imovables;
+    public List<aiMoveable> getAllMoveables() {
+        return aiMoveables;
     }
     public void addEntity(Entities entity) {
         entityList.add(entity);
-        if (entity instanceof iMovable) {
-        	imovables.add((iMovable) entity);
+        
+        if (entity instanceof aiMoveable) {
+        	aiMoveables.add((aiMoveable) entity);
         }
         if(entity instanceof iCollision) {
         	cm.addCollidable((iCollision) entity);
         }
+        
     }
     
     public void deleteEntity(Entities entity) {
     	entityList.remove(entity);
-    	if (entity instanceof iMovable) {
-        	imovables.remove((iMovable) entity);
+    	if (entity instanceof aiMoveable) {
+    		aiMoveables.remove((aiMoveable) entity);
         }
     	if(entity instanceof iCollision) {
         	cm.deleteCollidable((iCollision) entity);
@@ -59,16 +55,20 @@ public class EntityManager {
     }
     
     public void draw() {
-    	for (Entities entity: entityList) {
-    		entity.draw(this);
-    	
+    	if (entityList.isEmpty()) {} 
+    	 
+    	else {
+    		for (Entities entity: entityList) {
+    			entity.draw(this);
+    		}
+    		this.handleMove();
     	}
+    		
     	
-    	this.handleMove();
     }
     
     public void handleMove() {
-    	for (iMovable imove: imovables) {
+    	for (aiMoveable imove: aiMoveables) {
     		imove.move();
     	}
     }

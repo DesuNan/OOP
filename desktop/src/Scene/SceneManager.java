@@ -1,14 +1,16 @@
-package com.mygdx.game;
+package Scene;
+
 import java.util.*;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import Collision.*;
 import InputOutput.*;
 import Player.*;
+import com.mygdx.game.*;
+import Entity.*;
 
 public class SceneManager {
 	private Stack<Scene> scenes; 
-	private Stack<iInput> iInputs;
-	private GameState currentStatus;
-	private EntityManager entityManager;
+	private Stack<iSwapScene> iSwapScene;
+	private EntitiesManager entityManager;
 	private InputOutputManager ioman;
 	private PlayersManager playerManager;
 	private CollisionManager collisionManager;
@@ -19,12 +21,16 @@ public class SceneManager {
 		this.ioman = ioman;
 		this.gm = gm;
 		scenes = new Stack<Scene>();
-		this.iInputs = new Stack<iInput>();
+		this.iSwapScene = new Stack<iSwapScene>();
 		this.collisionManager = new CollisionManager(this);
-		this.entityManager = new EntityManager(ioman, collisionManager);
+		this.entityManager = new EntitiesManager(ioman, collisionManager);
 		this.playerManager = new PlayersManager(ioman, collisionManager);
 	
 	}
+	public GameLifeCycle getGameLifeCycle() {
+		return this.gm;
+	}
+	
 	public CollisionManager getCollisionManager() {
 		return this.collisionManager;
 	}
@@ -36,38 +42,30 @@ public class SceneManager {
 		return this.playerManager;
 	}
 	
-	public EntityManager getEntityManager() {
+	public EntitiesManager getEntityManager() {
 		return this.entityManager;
 	}
 	
-	public void setEntityManager(EntityManager em) {
+	public void setEntityManager(EntitiesManager em) {
 		this.entityManager = em;
-	}
-	
-	public GameState getCurrentGameStatus() {
-		return this.currentStatus;
-	}
-	
-	public void updateCurrentGameStatus(GameState gameStatus) {
-		this.currentStatus = gameStatus;
 	}
 	
 	public void push(Scene scene) {
 		scenes.push(scene);
-		if (scene instanceof iInput) {
-        	iInputs.push((iInput) scene);
+		if (scene instanceof iSwapScene) {
+			iSwapScene.push((iSwapScene) scene);
         }
 	}
 	
 	public void pop() {
 		scenes.pop();
-		iInputs.pop();
+		iSwapScene.pop();
 	}
 	
 	public void set(Scene scene) {
 		this.pop();
 		this.push(scene);
-		this.currentStatus = scene.getGameStatus();
+		
 	}
 	
 	public void update(float dt) {

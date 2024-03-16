@@ -1,7 +1,8 @@
-package com.mygdx.game;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+package Scene;
 
-public abstract class Scene implements iInput {
+import com.mygdx.game.*;
+
+public abstract class Scene implements iSwapScene {
 	private GameState GameStatus;
 	protected SceneManager sm;
 

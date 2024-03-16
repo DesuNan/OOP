@@ -1,8 +1,9 @@
-package com.mygdx.game;
+package Entity;
 import InputOutput.*;
+import Collision.*;
 
-abstract public class Entities implements iMovable, iCollision {
-	protected EntityManager em;
+abstract public class Entities implements aiMoveable, iCollision {
+	protected EntitiesManager em;
 	private float x;
     private float y;
     private float speed;
@@ -52,8 +53,8 @@ abstract public class Entities implements iMovable, iCollision {
 		return ioman.getHeight(this.getImagePath());
 	}
 	
-    abstract public void draw(EntityManager em);
-    abstract public void dispose(EntityManager em);
+    abstract public void draw(EntitiesManager em);
+    abstract public void dispose(EntitiesManager em);
 
    
 }

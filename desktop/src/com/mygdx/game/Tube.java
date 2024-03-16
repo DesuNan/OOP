@@ -1,16 +1,10 @@
-/*
 package com.mygdx.game;
-import InputOutput.InputOutputManager;
+
 import Entity.*;
 
-public class BotTube extends Entities {
+public class Tube extends Entities {
 	
-	public BotTube () {
-		this.x = 100;
-		this.y=100;
-		this.setImagePath("bottomtube.png");
-	}
-	public BotTube(float x, float y, float speed, String imgPath) {
+	public Tube(float x, float y, float speed, String imgPath) {
 		
 		this.setX(x);
 		this.setY(y);
@@ -26,7 +20,6 @@ public class BotTube extends Entities {
 	
 	@Override
 	public void dispose(EntitiesManager em) {
-		// this.batch.dispose();
 		em.getIOMan().disposeBatch();
 	}
 
@@ -38,4 +31,3 @@ public class BotTube extends Entities {
 
 	
 }
-*/

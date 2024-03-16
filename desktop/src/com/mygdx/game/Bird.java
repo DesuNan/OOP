@@ -1,21 +1,20 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
 import InputOutput.InputOutputManager;
 
 import java.util.List;
+import Collision.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import Player.*;
 
 public class Bird extends Players {
-
-	
-	
 	public Bird(float x, float y, float speed, String imagePath, List<Integer> keyBinds) {
 		this.setX(x);
 		this.setY(y);
@@ -30,21 +29,17 @@ public class Bird extends Players {
 	@Override
 	public void handleMovement(PlayersManager pm) {
 		// TODO Auto-generated method stub
+		
 		// Jump Movement
 		if (this.getKeyBinds() != null) {
 		for (int keyBind: this.getKeyBinds()) {
 			if (pm.getIOMan().isKeyPressed(keyBind)) {
+				// play sound whenever player move
+				pm.getIOMan().playSound("point.ogg");
 				this.setY(this.getY() + this.getSpeed());
 			}
 		}
 		}
-		
-		/*
-		else if (pm.getIOMan().isKeyPressed(keyBindDown)) {
-			
-			this.setY(this.getY() - this.getSpeed());
-		}
-		*/
 		
 	}
 	@Override

@@ -1,13 +1,13 @@
-package com.mygdx.game;
+package Collision;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.mygdx.game.iCollision;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.EntityManager;
+import java.util.List;
+import Scene.*;
 import Player.*;
+import com.mygdx.game.*;
+import Collision.iCollision;
+import Entity.*;
 
 
 public class CollisionManager {
@@ -54,8 +54,27 @@ public class CollisionManager {
      // If Collided, scenemanager change scene.
         if (player != null) {
         	for (Entities entity: entityList) {
+        		// If player and entity collide
         		if (isCollided(entity,player)) {
+        			sm.getIOMan().playSound("hit.ogg");
         			sm.set(new EndScene(sm));
+        			
+        		}
+        		
+        		// Endless loop of tubes.
+        		if (entity.getX()+entity.getWidth(sm.getIOMan()) < 0 && entity instanceof Tube) {
+        			entity.setX(800);
+        			
+        		}
+        		
+        		// Add points for player passing Tube
+        		if (entity.getX()+entity.getWidth(sm.getIOMan()) < player.getX() && entity instanceof Tube) {
+        			// 10 points per tube set
+        			// 0.25 because it takes 40 miliseconds to pass the tube.
+        			player.setScore(player.getScore() + (0.25));
+        			System.out.println("Player Score: " + player.getScore());
+        			sm.getIOMan().playSound("point.ogg");
+        			
         		}
         	}
         }

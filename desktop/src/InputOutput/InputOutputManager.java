@@ -1,7 +1,6 @@
 package InputOutput;
 
 import com.badlogic.gdx.graphics.Texture;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,6 +8,8 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import Player.*;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.audio.Music;
 
 
 
@@ -16,6 +17,8 @@ public class InputOutputManager extends InputAdapter{
 	private SpriteBatch batch;
 	private PlayersManager pm;
 	private Set<Integer> keysPressed;
+	private Sound sound;
+	private Music music ;//= Gdx.audio.newMusic(Gdx.files.internal("arcade.mp3"));
 	
 	public InputOutputManager () {
 		Gdx.input.setInputProcessor(this);
@@ -23,9 +26,10 @@ public class InputOutputManager extends InputAdapter{
 		Gdx.gl.glClearColor(256, 256, 100, 100);
 		
 	}
-	public PlayersManager getPLayerManager() {
+	public PlayersManager getPlayerManager() {
 		return this.pm;
 	}
+	
 	public void setPlayerManager(PlayersManager pm) {
 		
 		this.pm = pm;
@@ -43,6 +47,8 @@ public class InputOutputManager extends InputAdapter{
 	  }
 	  public void disposeBatch() {
 	    this.batch.dispose();
+	    this.disposeSound();
+	    this.disposeMusic();
 	  }
 	  
 	  public SpriteBatch getBatch() {
@@ -76,7 +82,6 @@ public class InputOutputManager extends InputAdapter{
 	@Override
 	public boolean keyDown(int keycode) {
 		keysPressed.add(keycode);
-		// System.out.println("Key typed: Listen "+keycode);
 		return false;
 		
 	}
@@ -89,6 +94,36 @@ public class InputOutputManager extends InputAdapter{
 		
 	}
 	
+	public void playSound(String path) {
+        if (sound != null) {
+            sound.dispose(); // Dispose of any previously playing music
+        }
+       
+        sound = Gdx.audio.newSound(Gdx.files.internal(path));
+        sound.play(1.0f);
+    }
+	
+	public void disposeSound() {
+        if (sound != null) {
+            sound.dispose();
+        }
+    }
+	 public void playMusic (String path) {
+		 
+	        System.out.println(Gdx.files.internal(path));
+	        music = Gdx.audio.newMusic(Gdx.files.internal(path));
+	        music.play();
+	        // this.music  = Gdx.audio.newMusic(Gdx.files.internal(path));
+	        // this.music.play();
+	        
+	 }
+	 
+	 public void disposeMusic() {
+	        if (this.music != null) {
+	            this.music.dispose();
+	        }
+	    }
+
 
 	  
 }

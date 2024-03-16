@@ -1,6 +1,7 @@
 package Player;
 
 import java.util.ArrayList;
+import Collision.*;
 import java.util.List;
 
 
@@ -15,30 +16,9 @@ abstract public class Players implements playerMoveable, iCollision {
     private float y;
     private float speed;
     private String imagePath;
-    private float score;
+    private double score = 0;
     private List<Integer> keyBinds = new ArrayList<>();
     
-    /*
-    private int keyBindUp;
-    private int keyBindDown;
-    private int keyBindLeft;
-    private int keyBindRight;
-    */
-    
-    
-    /*
-    public Players (float x,float y,float speed, String img) {
-    	this.x=x;
-    	this.y=y;
-    	this.speed=speed;
-    	this.imagePath=img;
-    	this.score = 0;
-    	this.keyBindUp = Input.Keys.UP;
-    	this.keyBindDown = Input.Keys.DOWN;
-    	this.keyBindLeft = Input.Keys.LEFT;
-    	this.keyBindRight = Input.Keys.RIGHT;
-    	
-    	}*/
     public List<Integer> getKeyBinds () {
     	return this.keyBinds;
     }
@@ -49,7 +29,7 @@ abstract public class Players implements playerMoveable, iCollision {
     	this.keyBinds.remove(keyBind);
     }
     
-    public float getScore() {
+    public double getScore() {
     	return this.score;
     }
   
@@ -66,7 +46,7 @@ abstract public class Players implements playerMoveable, iCollision {
     public String getImage() {
     	return this.imagePath;
     }
-    public void setScore(float score) {
+    public void setScore(double score) {
     	this.score = score;
     }
     public void setX(float x) {
@@ -91,18 +71,6 @@ abstract public class Players implements playerMoveable, iCollision {
 	@Override
 	abstract public void handleGravity(PlayersManager pm);
 	
-	/*{
-		// TODO Auto-generated method stub
-		
-		if (ioman.isKeyPressed(keyBindUp)) {
-			this.setY(this.getY() + this.getSpeed());
-		}
-		else if (ioman.isKeyPressed(keyBindDown)) {
-			
-			this.setY(this.getY() - this.getSpeed());
-		}
-		
-	}*/
 	@Override
 	public float getWidth(InputOutputManager ioman) {
 		// TODO Auto-generated method stub

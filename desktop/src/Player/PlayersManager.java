@@ -1,10 +1,7 @@
 package Player;
 
 import java.util.*;
-
-import com.mygdx.game.CollisionManager;
-import com.mygdx.game.iCollision;
-
+import Collision.*;
 import InputOutput.InputOutputManager;
 
 public class PlayersManager{
@@ -56,7 +53,6 @@ public class PlayersManager{
     public void draw() {
     	for (Players players: players) {
     		players.draw(this);
-    		// this.ioman.getBatch().draw(this.ioman.getImage(players.getImage()),players.getX(),players.getY());
     	}
     	
     	this.handleInput(this);
