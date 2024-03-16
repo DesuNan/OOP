@@ -1,10 +1,13 @@
 package com.mygdx.game;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import Player.Players;
-
+import com.badlogic.gdx.Input;
 public class PlayScene extends Scene {
 	private int TUBE_SPACING = 200;
 	private int TUBE_COUNT = 5;
@@ -21,10 +24,10 @@ public class PlayScene extends Scene {
 		this.sm = sm;
 		background = this.sm.getIOMan().getImage("bg.png");
 		
-		
-		sm.getEntityManager().addEntity(new BotTube(800,25,5));
-		sm.getEntityManager().addEntity(new TopTube(800,225,5));
-		sm.getPlayerManager().addPlayer(new Players(100,100,12,"bird.png"));
+		sm.getEntityManager().addEntity(new BotTube(800,50,5, "bottomtube.png"));
+		sm.getEntityManager().addEntity(new BotTube(800,500,5, "toptube.png"));
+		// sm.getEntityManager().addEntity(new TopTube(800,225,5));
+		sm.getPlayerManager().addPlayer(new Bird(100,100,12,"bird.png", new ArrayList<>(List.of(Input.Keys.UP))));
 		
 		/*
 		entityManager = sm.getEntityManager();

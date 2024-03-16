@@ -32,10 +32,10 @@ public class CollisionManager {
     }
 	
     public boolean isCollided(iCollision entity1, iCollision entity2) {
-    	return entity1.getX() < entity2.getX() + entity2.getWidth() &&
-    			entity1.getX() + entity1.getWidth() > entity2.getX() &&
-    			entity1.getY() < entity2.getY() + entity2.getHeight() &&
-    			entity1.getY() + entity1.getHeight() > entity2.getY();
+    	return entity1.getX() < entity2.getX() + entity2.getWidth(sm.getIOMan()) &&
+    			entity1.getX() + entity1.getWidth(sm.getIOMan()) > entity2.getX() &&
+    			entity1.getY() < entity2.getY() + entity2.getHeight(sm.getIOMan()) &&
+    			entity1.getY() + entity1.getHeight(sm.getIOMan()) > entity2.getY();
     }
     
 

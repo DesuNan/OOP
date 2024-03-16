@@ -1,12 +1,21 @@
 package com.mygdx.game;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import InputOutput.*;
 
 abstract public class Entities implements iMovable, iCollision {
 	protected EntityManager em;
 	private float x;
     private float y;
     private float speed;
+    private String imagePath;
 
+    public String getImagePath () {
+    	return this.imagePath;
+    }
+    
+    public void setImagePath(String imagePath) {
+    	this.imagePath = imagePath;
+    }
+    
     public float getX() {
         return this.x;
     }
@@ -31,6 +40,18 @@ abstract public class Entities implements iMovable, iCollision {
         this.speed = speed;
     }
     
+    @Override
+	public float getWidth(InputOutputManager ioman) {
+		// TODO Auto-generated method stub
+		return ioman.getWidth(this.getImagePath());
+	}
+
+	@Override
+	public float getHeight(InputOutputManager ioman) {
+		// TODO Auto-generated method stub
+		return ioman.getHeight(this.getImagePath());
+	}
+	
     abstract public void draw(EntityManager em);
     abstract public void dispose(EntityManager em);
 

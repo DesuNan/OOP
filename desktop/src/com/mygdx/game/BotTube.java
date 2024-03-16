@@ -1,49 +1,23 @@
 package com.mygdx.game;
-
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import InputOutput.InputOutputManager;
 
 public class BotTube extends Entities {
-	private Texture BotTubePic;
 	
-	public BotTube(float x, float y, float speed) {
+	
+	public BotTube(float x, float y, float speed, String imgPath) {
 		
-		this.BotTubePic = new Texture("bottomtube.png");
 		this.setX(x);
 		this.setY(y);
 		this.setSpeed(speed);
+		this.setImagePath(imgPath);
 		
 	}
-	
-	public Texture getBotTube() {
-		return this.BotTubePic;
-	}
-	public void setopTube(Texture pic) {
-		this.BotTubePic = pic;
-	}
-	
-	@Override
-	public float getWidth() {
-	    return BotTubePic.getWidth(); // or bottomTube.getWidth(), assuming they are the same
-	}
-
-	@Override
-	public float getHeight() {
-	    return BotTubePic.getHeight(); // Assuming you're checking collisions with one tube at a time
-	}	
 	
 	@Override
 	public void draw(EntityManager em) {
-		
-		em.getIOMan().getBatch().draw(this.getBotTube(), this.getX(), this.getY());
-        
+		em.getIOMan().getBatch().draw(em.getIOMan().getImage(this.getImagePath()), this.getX(), this.getY());
 	}
-	/*
-	@Override
-	public void move() {
-		this.setX(this.getX() - this.getSpeed());
-	}
-	*/
+	
 	@Override
 	public void dispose(EntityManager em) {
 		// this.batch.dispose();
@@ -55,4 +29,6 @@ public class BotTube extends Entities {
 		// TODO Auto-generated method stub
 		this.setX(this.getX() - this.getSpeed());
 	}
+
+	
 }

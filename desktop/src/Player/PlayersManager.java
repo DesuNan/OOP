@@ -21,7 +21,7 @@ public class PlayersManager{
 		this.ioman.setPlayerManager(this);
 	}
 	
-	public InputOutputManager getIOManager() {
+	public InputOutputManager getIOMan() {
 		return this.ioman;
 	}
 	
@@ -55,14 +55,29 @@ public class PlayersManager{
     
     public void draw() {
     	for (Players players: players) {
-    		this.ioman.getBatch().draw(this.ioman.getImage(players.getImage()),players.getX(),players.getY());
+    		players.draw(this);
+    		// this.ioman.getBatch().draw(this.ioman.getImage(players.getImage()),players.getX(),players.getY());
     	}
-    	this.handleInput(ioman);
+    	
+    	this.handleInput(this);
+    	this.handleGravity(this);
     }
     
-    public void handleInput(InputOutputManager ioman) {
+    public void handleInput(PlayersManager pm) {
     	for (playerMoveable imove: imovables) {
-    		imove.handleMovement(ioman);
+    		imove.handleMovement(pm);
+    	}
+    }
+    
+    public void handleGravity (PlayersManager pm) {
+    	for (playerMoveable imove: imovables) {
+    		imove.handleGravity(pm);
+    	}
+    }
+    
+    public void dispose() {
+    	for (Players players: players) {
+    		players.dispose(this);
     	}
     }
    

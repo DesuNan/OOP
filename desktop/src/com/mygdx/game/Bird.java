@@ -3,43 +3,66 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+
+import InputOutput.InputOutputManager;
+
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import Player.*;
 
-public class Bird extends Entities{
+public class Bird extends Players {
 
-	private Texture bird;
 	
-	public Bird(float x, float y) {
+	
+	public Bird(float x, float y, float speed, String imagePath, List<Integer> keyBinds) {
 		this.setX(x);
 		this.setY(y);
+		this.setSpeed(speed);
+		this.setImage(imagePath);
+		for (int keyBind: keyBinds) {
+			
+			this.addKeyBinds(keyBind);
+		}
+	}
+	
+	@Override
+	public void handleMovement(PlayersManager pm) {
+		// TODO Auto-generated method stub
+		// Jump Movement
+		if (this.getKeyBinds() != null) {
+		for (int keyBind: this.getKeyBinds()) {
+			if (pm.getIOMan().isKeyPressed(keyBind)) {
+				this.setY(this.getY() + this.getSpeed());
+			}
+		}
+		}
 		
-		this.setSpeed(250);
-		bird = new Texture("bird.png");
+		/*
+		else if (pm.getIOMan().isKeyPressed(keyBindDown)) {
+			
+			this.setY(this.getY() - this.getSpeed());
+		}
+		*/
+		
 	}
-	
-	public Texture getBird() {
-		return bird;
-	}
-	
 	@Override
-	public float getWidth() {
-	    return bird.getWidth();
-	}
-
-	@Override
-	public float getHeight() {
-	    return bird.getHeight();
+	public void handleGravity(PlayersManager pm) {
+		if (this.getY() > 0) {
+			// Need to fine tune the gravity amount.
+			this.setY(this.getY() - (this.getSpeed()/8));
+		}
 	}
 	
 	@Override
-	public void draw(EntityManager em) {
-		em.getIOMan().getBatch().draw(this.getBird(), this.getX(), this.getY());
+	public void draw(PlayersManager pm) {
+		pm.getIOMan().getBatch().draw(pm.getIOMan().getImage(this.getImage()), this.getX(), this.getY());
 	}
 	
 	
 	@Override
-	public void dispose(EntityManager em) {
-		em.getIOMan().disposeBatch();
+	public void dispose(PlayersManager pm) {
+		pm.getIOMan().disposeBatch();
 	}
 }

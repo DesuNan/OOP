@@ -14,7 +14,6 @@ public class GameLifeCycle extends ApplicationAdapter {
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 600;
 	private SceneManager sm;
-	private SpriteBatch batch;
 	private GameClock clock;
 	private GameState GameStatus;
 	private InputOutputManager ioman;
@@ -35,8 +34,7 @@ public class GameLifeCycle extends ApplicationAdapter {
 	public void create() {
 		this.ioman = new InputOutputManager();
 		this.ioman.createBatch();
-		
-		sm = new SceneManager(ioman);
+		sm = new SceneManager(ioman, this);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		sm.push(new StartScene(sm));
 		this.clock = new GameClock();	

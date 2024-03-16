@@ -12,17 +12,17 @@ public class SceneManager {
 	private InputOutputManager ioman;
 	private PlayersManager playerManager;
 	private CollisionManager collisionManager;
+	private GameLifeCycle gm;
 	
 	// Saves Scenes in a stack, reading the top of the stack.
-	public SceneManager(InputOutputManager ioman){
+	public SceneManager(InputOutputManager ioman, GameLifeCycle gm){
 		this.ioman = ioman;
+		this.gm = gm;
 		scenes = new Stack<Scene>();
 		this.iInputs = new Stack<iInput>();
 		this.collisionManager = new CollisionManager(this);
 		this.entityManager = new EntityManager(ioman, collisionManager);
 		this.playerManager = new PlayersManager(ioman, collisionManager);
-		
-		
 	
 	}
 	public CollisionManager getCollisionManager() {
