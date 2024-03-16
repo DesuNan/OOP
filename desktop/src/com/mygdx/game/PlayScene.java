@@ -33,8 +33,7 @@ public class PlayScene extends Scene {
 		sm.getPlayerManager().addPlayer(new Bird(100,100,12,"bird.png", new ArrayList<>(List.of(Input.Keys.UP))));
 	
 		sm.getEntityManager().addEntity(new Tube(800 ,50,5, "bottomtube.png"));
-		sm.getEntityManager().addEntity(new Tube(800 ,500,5, "toptube.png"));
-		/*
+		sm.getEntityManager().addEntity(new Tube(800 ,500,5, "toptube.png"));		/*
 		entityManager = sm.getEntityManager();
 		entityManager.addEntity(new Bird(100, 100));
 		

@@ -1,10 +1,7 @@
 package Entity;
 import java.util.ArrayList;
 import Collision.*;
-
 import java.util.List;
-
-
 import InputOutput.InputOutputManager;
 
 public class EntitiesManager {
@@ -78,7 +75,6 @@ public class EntitiesManager {
     		entity.dispose(this);
     	}
     }
-    
     
 /*
 	@Override

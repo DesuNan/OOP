@@ -23,7 +23,6 @@ abstract public class Players implements playerMoveable, iCollision {
     	return this.keyBinds;
     }
     public void addKeyBinds(int keyBind) {
-    	this.keyBinds.add(keyBind);
     }
     public void deleteKeyBinds(int keyBind) {
     	this.keyBinds.remove(keyBind);

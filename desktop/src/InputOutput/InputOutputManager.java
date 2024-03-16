@@ -75,6 +75,14 @@ public class InputOutputManager extends InputAdapter{
 	        return keysPressed.contains(keycode);
 	   }
 	 
+	 public boolean keyPressOnce (int keycode) {
+	     if (keysPressed.contains(keycode)) {
+	       keysPressed.remove(keycode);
+	       return true;
+	     }
+	     else return false;
+	   }
+	 
 	 public void clearKeys() {
 	        keysPressed.clear();
 	    }
@@ -82,16 +90,12 @@ public class InputOutputManager extends InputAdapter{
 	@Override
 	public boolean keyDown(int keycode) {
 		keysPressed.add(keycode);
-		return false;
-		
+		return true;
 	}
 	@Override
 	public boolean keyUp(int keycode) {
-		
 		keysPressed.remove(keycode);
-		
         return false;
-		
 	}
 	
 	public void playSound(String path) {
