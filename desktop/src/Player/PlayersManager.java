@@ -1,21 +1,27 @@
 package Player;
 
 import java.util.*;
+import Scene.*;
 import Collision.*;
 import InputOutput.InputOutputManager;
 
 public class PlayersManager{
 	private InputOutputManager ioman;
 	private CollisionManager cm;
+	private SceneManager sm;
 	private List<Players> players;
 	private List<playerMoveable> imovables;
 	
-	public PlayersManager (InputOutputManager ioman, CollisionManager cm) {
+	public PlayersManager (InputOutputManager ioman, CollisionManager cm, SceneManager sm) {
 		this.ioman = ioman;
 		this.cm = cm;
+		this.sm = sm;
 		this.players = new ArrayList<>();
 		this.imovables = new ArrayList<>();
 		this.ioman.setPlayerManager(this);
+	}
+	public SceneManager getSceneManager () {
+		return this.sm;
 	}
 	
 	public InputOutputManager getIOMan() {
@@ -39,6 +45,11 @@ public class PlayersManager{
         if (player instanceof playerMoveable) {
             imovables.remove((playerMoveable) player);
         }
+    }
+    
+    public void clearAll () {
+    	this.getAllMoveables().clear();
+    	this.getAllPlayers().clear();
     }
 
     // Method to get all players

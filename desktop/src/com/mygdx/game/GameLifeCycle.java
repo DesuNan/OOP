@@ -39,7 +39,7 @@ public class GameLifeCycle extends ApplicationAdapter {
 		sm = new SceneManager(ioman, this);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		sm.push(new StartScene(sm));
-		this.clock = new GameClock();	
+		this.clock = new GameClock(ioman, this);	
 		
 	}
 
@@ -49,6 +49,20 @@ public class GameLifeCycle extends ApplicationAdapter {
 		this.ioman.startBatch();
 		this.sm.render();
 		this.sm.update(Gdx.graphics.getDeltaTime());
+		
+		if(this.getStatus() == GameState.Start) {
+			this.clock.reset();
+		}
+		else if (this.getStatus()==GameState.Play) {
+			this.clock.start();
+			this.clock.draw();
+		}
+		else if (this.getStatus() == GameState.Pause || this.getStatus() == GameState.End){
+			this.clock.stop();
+			this.clock.draw();
+			
+		}
+	
 		this.ioman.stopBatch();
 		
 		/*
@@ -77,7 +91,7 @@ public class GameLifeCycle extends ApplicationAdapter {
 
 	@Override
 	public void dispose() {
-		this.clock.dispose();	
+		this.clock.dispose();
 		this.ioman.disposeBatch();
 	}
 }

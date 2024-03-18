@@ -1,6 +1,8 @@
 package InputOutput;
 
 import com.badlogic.gdx.graphics.Texture;
+
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +13,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.audio.Music;
 
-
+import com.badlogic.gdx.Input;
 
 public class InputOutputManager extends InputAdapter{
 	private SpriteBatch batch;
@@ -19,11 +21,13 @@ public class InputOutputManager extends InputAdapter{
 	private Set<Integer> keysPressed;
 	private Sound sound;
 	private Music music ;//= Gdx.audio.newMusic(Gdx.files.internal("arcade.mp3"));
+	private BitmapFont font;
 	
 	public InputOutputManager () {
 		Gdx.input.setInputProcessor(this);
 		keysPressed = new HashSet<>();
 		Gdx.gl.glClearColor(256, 256, 100, 100);
+		this.font = new BitmapFont();
 		
 	}
 	public PlayersManager getPlayerManager() {
@@ -90,7 +94,10 @@ public class InputOutputManager extends InputAdapter{
 	@Override
 	public boolean keyDown(int keycode) {
 		keysPressed.add(keycode);
+
 		return true;
+
+
 	}
 	@Override
 	public boolean keyUp(int keycode) {
@@ -117,8 +124,6 @@ public class InputOutputManager extends InputAdapter{
 	        System.out.println(Gdx.files.internal(path));
 	        music = Gdx.audio.newMusic(Gdx.files.internal(path));
 	        music.play();
-	        // this.music  = Gdx.audio.newMusic(Gdx.files.internal(path));
-	        // this.music.play();
 	        
 	 }
 	 
@@ -127,7 +132,13 @@ public class InputOutputManager extends InputAdapter{
 	            this.music.dispose();
 	        }
 	    }
-
-
+	 
+	 public void displayText (String text, float x, float y) {
+		 this.font.draw(this.getBatch(), text, x, y);
+	 }
+	 
+	 public void disposeText() {
+		 this.font.dispose();
+	 }
 	  
 }

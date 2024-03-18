@@ -24,7 +24,7 @@ public class SceneManager {
 		this.iSwapScene = new Stack<iSwapScene>();
 		this.collisionManager = new CollisionManager(this);
 		this.entityManager = new EntitiesManager(ioman, collisionManager);
-		this.playerManager = new PlayersManager(ioman, collisionManager);
+		this.playerManager = new PlayersManager(ioman, collisionManager, this);
 	
 	}
 	public GameLifeCycle getGameLifeCycle() {

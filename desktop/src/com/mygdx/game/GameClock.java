@@ -1,5 +1,6 @@
 package com.mygdx.game;
 import javax.swing.Timer;
+import InputOutput.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,13 +12,16 @@ public class GameClock {
     private String text;
     private SpriteBatch batch;
     private BitmapFont font;
+    private InputOutputManager ioman;
+    private GameLifeCycle gm;
     
-    public GameClock() {
-    	batch = new SpriteBatch();
-        font = new BitmapFont();
-        
+    
+    public GameClock(InputOutputManager ioman, GameLifeCycle gm) {
+    	this.ioman=ioman;
+    	this.gm=gm;
+    	
         // Increases the timer by 1 every 1000 miliseconds.
-        timer = new Timer(1000, new ActionListener() {
+        this.timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 elapsedTime++; 
@@ -37,24 +41,22 @@ public class GameClock {
         return elapsedTime;
     }
    
-    public void resetClock () {
+    public void reset () {
     	if (timer.isRunning()) {
     		timer.stop();
     	}
     	this.elapsedTime = 0;
     }
     // Draws the clock at position 10,20
+    
     public void draw () {
-    	text = "Game Time: " + this.elapsedTime;
-    	this.batch.begin();
-    	this.font.draw(batch, text, 10, 20);
-    	this.batch.end();
+    	this.text = "Game Time: " + this.elapsedTime;
+    	this.ioman.displayText(text,10,20);
     	
     }
     
     public void dispose() {
-    	this.font.dispose();
-    	this.batch.dispose();
+    	this.ioman.disposeText();
     }
 
 

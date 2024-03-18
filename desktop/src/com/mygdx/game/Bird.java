@@ -1,4 +1,4 @@
-package com.mygdx.game;
+	package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 
@@ -70,7 +70,16 @@ public class Bird extends Players {
 	
 	@Override
 	public void draw(PlayersManager pm) {
+		
+		if (pm.getSceneManager().getGameLifeCycle().getStatus() == GameState.Play) {
 		pm.getIOMan().getBatch().draw(pm.getIOMan().getImage(this.getImage()), this.getX(), this.getY());
+		// draw player score
+		pm.getIOMan().displayText("Score: " + this.getScore(),400,550);
+		}
+		else if(pm.getSceneManager().getGameLifeCycle().getStatus() == GameState.End) {
+	
+			pm.getIOMan().displayText("Score: " + this.getScore(), (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (pm.getIOMan().getHeight("gameover.png"))/2);
+		}
 	}
 	
 	

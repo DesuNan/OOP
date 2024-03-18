@@ -18,6 +18,10 @@ public class EntitiesManager {
     	this.aiMoveables = new ArrayList<>();
         
     }
+    public void clearAll () {
+    	this.getAllMoveables().clear();
+    	this.getEntityList().clear();
+    }
     
     public InputOutputManager getIOMan() {
     	return this.ioman;

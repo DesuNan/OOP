@@ -19,6 +19,9 @@ public class CollisionManager {
 		this.collidables = new ArrayList<>();
 		
 	}
+	public void clearAll () {
+    	this.getCollidablesList().clear();
+    }
 	
 	public List<iCollision> getCollidablesList () {
 		return this.collidables;
