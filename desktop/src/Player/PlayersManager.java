@@ -71,6 +71,8 @@ public class PlayersManager{
     }
     
     public void handleInput(PlayersManager pm) {
+    	
+    	
     	for (playerMoveable imove: imovables) {
     		imove.handleMovement(pm);
     	}

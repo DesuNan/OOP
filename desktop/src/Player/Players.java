@@ -1,9 +1,12 @@
 package Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import Collision.*;
 import java.util.List;
-
+import java.util.Map;
 
 import com.badlogic.gdx.Input;
 
@@ -17,16 +20,28 @@ abstract public class Players implements playerMoveable, iCollision {
     private float speed;
     private String imagePath;
     private double score = 0;
-    private List<Integer> keyBinds = new ArrayList<>();
+    private Map<Integer, Runnable> actionsMap = new HashMap<>();
     
-    public List<Integer> getKeyBinds () {
-    	return this.keyBinds;
+    public Players () {
+    	
     }
-    public void addKeyBinds(int keyBind) {
+    
+    public Players (PlayersManager pm) {
+		this.pm = pm;
+	}
+    
+    public Map<Integer, Runnable> getActionsMap() {
+    	return this.actionsMap;
     }
-    public void deleteKeyBinds(int keyBind) {
-    	this.keyBinds.remove(keyBind);
+    
+    public void addActions(int keyBind, Runnable actions) {
+    	this.actionsMap.put(keyBind, actions);
     }
+    
+    public void deleteActions(int keyBind) {
+        actionsMap.remove(keyBind);
+    }
+ 
     
     public double getScore() {
     	return this.score;

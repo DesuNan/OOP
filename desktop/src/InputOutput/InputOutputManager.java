@@ -94,8 +94,8 @@ public class InputOutputManager extends InputAdapter{
 	@Override
 	public boolean keyDown(int keycode) {
 		keysPressed.add(keycode);
-
-		return true;
+		
+		return false;
 
 
 	}

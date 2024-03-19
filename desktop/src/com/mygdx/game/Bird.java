@@ -1,58 +1,61 @@
-	package com.mygdx.game;
+package com.mygdx.game;
+import java.util.Map;
 
-import com.badlogic.gdx.graphics.Texture;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
-
-import InputOutput.InputOutputManager;
-
-import java.util.List;
-import Collision.*;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import Player.*;
 
 public class Bird extends Players {
 	private float velocity = 0; // Bird's vertical velocity
 	private final float GRAVITY = -0.5f; // Gravity effect on the bird
 	private final float JUMP_FORCE = 8f; // The upward force applied when jumping
-	public Bird(float x, float y, float speed, String imagePath, List<Integer> keyBinds) {
+	private static Bird instance;
+	private Bird(PlayersManager pm, float x, float y, float speed, String imagePath,  int jumpKeyBind) {
+		// super(pm);
+		this.pm = pm;
 		this.setX(x);
 		this.setY(y);
 		this.setSpeed(speed);
 		this.setImage(imagePath);
-		for (int keyBind: keyBinds) {
-			
-			this.addKeyBinds(keyBind);
-		}
+		
+		this.addActions(jumpKeyBind, () -> {
+		           	// Apply jump force
+		            this.velocity = JUMP_FORCE;
+		            //Play jump sound
+		            pm.getIOMan().playSound("jump.mp3");
+		});
+		
 	}
+	public static Bird getInstance(PlayersManager pm, float x, float y, float speed, String imagePath, int jumpKeyBind) {
+	    if (instance == null) {
+	        instance = new Bird(pm, x, y, speed, imagePath, jumpKeyBind);
+	    }
+	    return instance;
+	}
+	
+	public int getJumpKeyBind () {
+		return this.getJumpKeyBind();
+	}
+	
+	public void setJumpKeyBind (int keyBind) {
+		this.deleteActions(this.getJumpKeyBind());
+		this.addActions(keyBind, () -> {
+		           	// Apply jump force
+		            this.velocity = JUMP_FORCE;
+		            //Play jump sound
+		            pm.getIOMan().playSound("jump.mp3");
+		});
+	}
+	
 	
 	@Override
 	public void handleMovement(PlayersManager pm) {
-		// TODO Auto-generated method stub
-        this.setY(this.getY() + GRAVITY);
-        if (pm.getIOMan().isKeyPressed(Keys.UP)) { // cheat way first
-            // Apply jump force
-            this.velocity = JUMP_FORCE;
-            //Play jump sound
-            pm.getIOMan().playSound("jump.mp3");
-        }
-        /*
-        // Jump Movement
-        if (this.getKeyBinds() != null) {
-        for (int keyBind: this.getKeyBinds()) {
-          if (pm.getIOMan().isKeyPressed(keyBind)) {
-            // play sound whenever player move
-            pm.getIOMan().playSound("point.ogg");
-            this.setY(this.getY() + this.getSpeed());
-          }
-        }
-        }
-        */
+		for (Map.Entry<Integer, Runnable> entry : this.getActionsMap().entrySet()) {
+			if (pm.getIOMan().keyPressOnce(entry.getKey())) {
+				entry.getValue().run();
+			}
+		}
 		
 	}
+	
 	@Override
 	public void handleGravity(PlayersManager pm) {
 	    // Apply gravity to velocity
