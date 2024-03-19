@@ -4,13 +4,8 @@ import com.badlogic.gdx.Input;
 
 public class PlayScene extends Scene {
 	
-	
-	
-	private SceneManager sm;
-	
 	public PlayScene (SceneManager sm) {
 		super(sm);
-		this.sm = sm;
 		
 		// Set game State, for synchronisation
 		this.sm.getGameLifeCycle().updateStatus(GameState.Play);
@@ -30,6 +25,9 @@ public class PlayScene extends Scene {
 		if(sm.getIOMan().isTouched()) {
 			sm.set(new EndScene(sm));
 		}
+		if(sm.getIOMan().keyPressOnce(Input.Keys.UP)) {
+			this.sm.getGameLifeCycle().updateStatus(GameState.Pause);
+		};
 	}
 	
 	@Override

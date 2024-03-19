@@ -57,7 +57,13 @@ public class GameLifeCycle extends ApplicationAdapter {
 			this.clock.start();
 			this.clock.draw();
 		}
-		else if (this.getStatus() == GameState.Pause || this.getStatus() == GameState.End){
+		else if (this.getStatus() == GameState.Pause ){
+			this.clock.stop();
+			this.clock.draw();
+			this.sm.set(new PauseScene(this.sm));
+			
+		}
+		else if (this.getStatus() == GameState.End){
 			this.clock.stop();
 			this.clock.draw();
 			

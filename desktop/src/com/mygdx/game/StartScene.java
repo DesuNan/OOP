@@ -1,7 +1,9 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import Scene.*;
+import com.badlogic.gdx.Input;
 
 
 public class StartScene extends Scene {
@@ -18,6 +20,9 @@ public class StartScene extends Scene {
 		if(sm.getIOMan().isTouched()) {
 			sm.set(new PlayScene(sm));
 		}
+		if(sm.getIOMan().keyPressOnce(Input.Keys.UP)) {
+			this.sm.getGameLifeCycle().updateStatus(GameState.Pause);
+		};
 	}
 	
 	@Override

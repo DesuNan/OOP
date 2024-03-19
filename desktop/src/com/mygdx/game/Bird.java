@@ -1,6 +1,5 @@
 package com.mygdx.game;
 import java.util.Map;
-
 import Player.*;
 
 public class Bird extends Players {
@@ -30,11 +29,11 @@ public class Bird extends Players {
 	    }
 	    return instance;
 	}
-	
+
 	public int getJumpKeyBind () {
 		return this.getJumpKeyBind();
 	}
-	
+
 	public void setJumpKeyBind (int keyBind) {
 		this.deleteActions(this.getJumpKeyBind());
 		this.addActions(keyBind, () -> {
@@ -53,9 +52,9 @@ public class Bird extends Players {
 				entry.getValue().run();
 			}
 		}
-		
+
 	}
-	
+
 	@Override
 	public void handleGravity(PlayersManager pm) {
 	    // Apply gravity to velocity
