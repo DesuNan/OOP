@@ -1,13 +1,15 @@
 package com.mygdx.game;
 import Scene.*;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
+
 import java.util.Random;
 
 public class PlayScene extends Scene {
 	
 	private int screenWidth;
 	private int screenHeight;
-
+	private Texture bg_texture;
 
 	public PlayScene (SceneManager sm) {
 		super(sm);
@@ -92,6 +94,7 @@ public class PlayScene extends Scene {
 		// TODO Auto-generated method stub
 		if(sm.getIOMan().isTouched()) {
 			sm.set(new EndScene(sm));
+			dispose(sm);
 		}
 		if(sm.getIOMan().keyPressOnce(Input.Keys.UP)) {
 			this.sm.getGameLifeCycle().updateStatus(GameState.Pause);
@@ -105,8 +108,8 @@ public class PlayScene extends Scene {
 	
 	@Override
 	public void render(SceneManager sm) {
-		sm.getIOMan().getBatch().draw(this.sm.getIOMan().getImage("bg.png"), 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
-		
+		bg_texture = sm.getIOMan().getImage("bg.png");
+		sm.getIOMan().getBatch().draw(bg_texture, 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
 		sm.getEntityManager().draw();
 		sm.getPlayerManager().draw();
 		sm.getCollisionManager().handleCollisions();
@@ -115,7 +118,10 @@ public class PlayScene extends Scene {
 	
 	@Override
 	public void dispose(SceneManager sm) {
-		sm.getIOMan().disposeBatch();
+//		sm.getIOMan().disposeBatch();
+		bg_texture.dispose();
+		sm.getPlayerManager().dispose();
+		sm.getEntityManager().dispose();
 	}
 	
 }

@@ -18,11 +18,9 @@ public abstract class Scene implements iSwapScene {
     
     public abstract void dispose(SceneManager sm);
 	
-	
 	public GameState getGameStatus() {
 		return this.GameStatus;
 	}
-	
 	
 	public void updateGameStatus (GameState Status) {
 		this.GameStatus = Status;
