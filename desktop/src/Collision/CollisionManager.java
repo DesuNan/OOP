@@ -60,7 +60,6 @@ public class CollisionManager {
 				if (isCollided(entity, player)) {
 					sm.getIOMan().playSound("hit.ogg");
 					sm.set(new EndScene(sm));
-
 				}
 
 				// Endless loop of tubes.
