@@ -22,6 +22,7 @@ public class PlayScene extends Scene {
 		this.screenHeight = screenHeight;
 		// Set game State, for synchronisation
 		this.sm.getGameLifeCycle().updateStatus(GameState.Play);
+		
 		this.gf = new GoodEntityFactory(sm, 2);
 		this.bf = new BadEntityFactory(sm, 2);
 		
@@ -121,6 +122,7 @@ public class PlayScene extends Scene {
 		sm.getEntityManager().draw();
 		sm.getPlayerManager().draw();
 		sm.getCollisionManager().handleCollisions();
+		sm.getEntityManager().deleteEntity();
 	}
 	
 	

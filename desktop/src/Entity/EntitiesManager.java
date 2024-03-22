@@ -3,10 +3,12 @@ import java.util.ArrayList;
 import Collision.*;
 import java.util.List;
 import InputOutput.InputOutputManager;
+import com.mygdx.game.*;
 
 public class EntitiesManager {
 	
     private List<Entities> entityList;
+    private List<Entities> deleteEntityList;
     private List<aiMoveable> aiMoveables;
     private InputOutputManager ioman;
     private CollisionManager cm;
@@ -45,14 +47,26 @@ public class EntitiesManager {
         
     }
     
-    public void deleteEntity(Entities entity) {
-    	entityList.remove(entity);
-    	if (entity instanceof aiMoveable) {
-    		aiMoveables.remove((aiMoveable) entity);
-        }
-    	if(entity instanceof iCollision) {
-        	cm.deleteCollidable((iCollision) entity);
-        }
+    public void deleteEntity() {
+    	for (Entities entity: entityList) {
+    		
+	   		
+    		if (entity instanceof Tube) {
+    			// Tube.reposition();
+    		}
+    		else {
+    			if (entity.getX() + entity.getWidth(ioman) < 0) {
+    				if (entity instanceof aiMoveable) {
+    		    		aiMoveables.remove((aiMoveable) entity);
+    		        }
+    		    	if(entity instanceof iCollision) {
+    		        	cm.deleteCollidable((iCollision) entity);
+    		        }
+    		    	entityList.remove(entity);
+    			}
+    		}
+    		
+    	}
     }
     
     public void draw() {
