@@ -68,6 +68,11 @@ public class Bird extends Players {
 	        this.setY(0);
 	        velocity = 0; // Stop moving once hitting the ground
 	    }
+	    
+	    if (this.getY() > 560) {
+	        this.setY(560);
+	        velocity = 0; // Stop moving once hitting the roof
+	    }
 	}
 	
 	@Override
