@@ -10,6 +10,8 @@ public class PlayScene extends Scene {
 	private int screenWidth;
 	private int screenHeight;
 	private Texture bg_texture;
+	private GoodEntityFactory gf;
+	private BadEntityFactory bf;
 
 	public PlayScene (SceneManager sm) {
 		super(sm);
@@ -20,6 +22,11 @@ public class PlayScene extends Scene {
 		this.screenHeight = screenHeight;
 		// Set game State, for synchronisation
 		this.sm.getGameLifeCycle().updateStatus(GameState.Play);
+		this.gf = new GoodEntityFactory(sm, 2);
+		this.bf = new BadEntityFactory(sm, 2);
+		
+		this.gf.drawEntities();
+		this.bf.drawEntities();
 		
 		// sm.getPlayerManager().addPlayer(new Bird(100,100,12,"bird.png", sm.getPlayerManager()));
 		// Bird is singleton
@@ -28,11 +35,11 @@ public class PlayScene extends Scene {
 		sm.getEntityManager().addEntity(new Tube(800 ,-100 ,5 , "bottomtube.png"));
 		sm.getEntityManager().addEntity(new Tube(800 ,500,5, "toptube.png"));
 		
-		spawnDanger(5);
-		spawnGood(5);
+		//spawnDanger(5);
+		//spawnGood(5);
 		spawnHealth(3);
 	}
-	
+	/*
 	public void spawnGood(int count) {
 		Random random = new Random();
 		int startY = 0;
@@ -77,7 +84,7 @@ public class PlayScene extends Scene {
 			sm.getEntityManager().addEntity(new Danger(x ,Posy , speed, "Fries.png"));
 		}
 	}
-	
+	*/
 	public void spawnHealth(int count) {
 		int starX = 300;
 		int spaceX = 50;
@@ -88,6 +95,7 @@ public class PlayScene extends Scene {
 			sm.getEntityManager().addEntity(new Danger(x ,y , 0, "Heart.png"));
 		}
 	}
+	
 	
 	@Override
 	public void handleInput(SceneManager sm) {

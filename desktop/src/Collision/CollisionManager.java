@@ -3,6 +3,8 @@ package Collision;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Random;
+
 import Scene.*;
 import Player.*;
 import com.mygdx.game.*;
@@ -43,6 +45,8 @@ public class CollisionManager {
 	}
 
 	public void handleCollisions() {
+		Random random = new Random();
+
 		Players player = null;
 		List<Entities> entityList = new ArrayList<>();
 		for (iCollision collidable : this.collidables) {
@@ -68,8 +72,20 @@ public class CollisionManager {
 					entity.setX(800);
 				}
 				
+				if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0 && entity instanceof Good) {
+					entity.setX(800);
+					int posY = random.nextInt(600);
+					int speed = random.nextInt(9) + 2;
+					entity.setY(posY);;
+					entity.setSpeed(speed);
+				}
+				
 				if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0 && entity instanceof Danger) {
 					entity.setX(800);
+					int posY = random.nextInt(600);
+					int speed = random.nextInt(9) + 2;
+					entity.setY(posY);
+					entity.setSpeed(speed);
 				}
 
 				// Add points for player passing Tube
