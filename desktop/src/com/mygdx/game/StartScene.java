@@ -20,8 +20,8 @@ public class StartScene extends Scene {
 	public void handleInput(SceneManager sm) {
 		// TODO Auto-generated method stub
 		if(sm.getIOMan().isTouched()) {
+			sm.dispose();
 			sm.set(new PlayScene(sm));
-			dispose(sm);
 		}
 		if(sm.getIOMan().keyPressOnce(Input.Keys.UP)) {
 			this.sm.getGameLifeCycle().updateStatus(GameState.Pause);

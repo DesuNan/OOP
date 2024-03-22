@@ -18,6 +18,7 @@ public class GameLifeCycle extends ApplicationAdapter {
 	private SceneManager sm;
 	private GameClock clock;
 	private GameState GameStatus;
+	private GameState prevStatus;
 	private InputOutputManager ioman;
 	
 	public GameLifeCycle () {
@@ -99,5 +100,6 @@ public class GameLifeCycle extends ApplicationAdapter {
 	public void dispose() {
 		this.clock.dispose();
 		this.ioman.disposeBatch();
+		this.sm.dispose();
 	}
 }

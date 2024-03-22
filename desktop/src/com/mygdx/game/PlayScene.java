@@ -93,8 +93,8 @@ public class PlayScene extends Scene {
 	public void handleInput(SceneManager sm) {
 		// TODO Auto-generated method stub
 		if(sm.getIOMan().isTouched()) {
+			sm.dispose();
 			sm.set(new EndScene(sm));
-			dispose(sm);
 		}
 		if(sm.getIOMan().keyPressOnce(Input.Keys.UP)) {
 			this.sm.getGameLifeCycle().updateStatus(GameState.Pause);
@@ -119,7 +119,7 @@ public class PlayScene extends Scene {
 	@Override
 	public void dispose(SceneManager sm) {
 //		sm.getIOMan().disposeBatch();
-		bg_texture.dispose();
+//		bg_texture.dispose();
 		sm.getPlayerManager().dispose();
 		sm.getEntityManager().dispose();
 	}

@@ -75,4 +75,8 @@ public class SceneManager {
 	public void render() {
 		scenes.peek().render(this);
 	}
+	
+	public void dispose() {
+		scenes.peek().dispose(this);
+	}
 }
