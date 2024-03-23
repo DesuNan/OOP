@@ -3,6 +3,9 @@ package com.mygdx.game;
 import Entity.*;
 
 public class Good extends Entities{
+	
+	private boolean hasCollidedWithPlayer = false;
+	
 	public Good(float x, float y, float speed, String imgPath) {
 		this.setX(x);
 		this.setY(y);
@@ -29,6 +32,14 @@ public class Good extends Entities{
 	public static float getHeight() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public boolean hasCollidedWithPlayer() {
+	    return this.hasCollidedWithPlayer;
+	}
+
+	public void setCollidedWithPlayer(boolean collided) {
+	    this.hasCollidedWithPlayer = collided;
 	}
 	
 }
