@@ -4,6 +4,8 @@ import Entity.*;
 
 public class Danger extends Entities {
 	
+	private boolean hasCollidedWithPlayer = false;
+	
 	public Danger(float x, float y, float speed, String imgPath) {
 		this.setX(x);
 		this.setY(y);
@@ -31,5 +33,14 @@ public class Danger extends Entities {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public boolean hasCollidedWithPlayer() {
+	    return this.hasCollidedWithPlayer;
+	}
+
+	public void setCollidedWithPlayer(boolean collided) {
+	    this.hasCollidedWithPlayer = collided;
+	}
+
 	
 }

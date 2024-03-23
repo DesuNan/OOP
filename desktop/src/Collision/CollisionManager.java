@@ -36,7 +36,7 @@ public class CollisionManager {
 	public void deleteCollidable(iCollision collidable) {
 		collidables.remove(collidable);
 	}
-
+	
 	public boolean isCollided(iCollision entity1, iCollision entity2) {
 		return entity1.getX() < entity2.getX() + entity2.getWidth(sm.getIOMan())
 				&& entity1.getX() + entity1.getWidth(sm.getIOMan()) > entity2.getX()
@@ -78,12 +78,22 @@ public class CollisionManager {
 						}
 					}
 				} else if (entity instanceof Danger) {
-					if (isCollided(entity, player)) {
+				    Danger dangerEntity = (Danger) entity; // Cast for easy access to Danger methods
+					if (isCollided(entity, player) && !dangerEntity.hasCollidedWithPlayer()) {
 						sm.getIOMan().playSound("hit.ogg");
 						if(player.getHealth()>=1 && player.getHealth()<=3) {
 							player.setHealth(player.getHealth()-1);
+				            dangerEntity.setCollidedWithPlayer(true); // Mark as collided
 						}
 					}
+					if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0) {
+				        entity.setX(800);
+				        int posY = random.nextInt(600);
+				        int speed = random.nextInt(9) + 2;
+				        entity.setY(posY);
+				        entity.setSpeed(speed);
+				        dangerEntity.setCollidedWithPlayer(false); // Reset collision flag
+				    }
 				}
 			
 				
