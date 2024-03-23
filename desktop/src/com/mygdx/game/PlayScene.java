@@ -24,7 +24,7 @@ public class PlayScene extends Scene {
 		this.sm.getGameLifeCycle().updateStatus(GameState.Play);
 		
 		this.gf = new GoodEntityFactory(sm, 2);
-		this.bf = new BadEntityFactory(sm, 2);
+		this.bf = new BadEntityFactory(sm, 2); 
 		
 		this.gf.drawEntities();
 		this.bf.drawEntities();
@@ -38,7 +38,7 @@ public class PlayScene extends Scene {
 		
 		//spawnDanger(5);
 		//spawnGood(5);
-		spawnHealth(3);
+		//spawnHealth(3);
 	}
 	/*
 	public void spawnGood(int count) {
@@ -86,23 +86,14 @@ public class PlayScene extends Scene {
 		}
 	}
 	*/
-	public void spawnHealth(int count) {
-		int starX = 300;
-		int spaceX = 50;
-		int y = 0;
-		
-		for (int i = 0; i < count; i++) {
-			int x = starX + i * spaceX;
-			sm.getEntityManager().addEntity(new Danger(x ,y , 0, "Heart.png"));
-		}
-	}
+	
 	
 	
 	@Override
 	public void handleInput(SceneManager sm) {
 		// TODO Auto-generated method stub
 		if(sm.getIOMan().isTouched()) {
-			sm.dispose();
+			//sm.dispose();
 			sm.set(new EndScene(sm));
 		}
 		if(sm.getIOMan().keyPressOnce(Input.Keys.UP)) {
@@ -122,9 +113,9 @@ public class PlayScene extends Scene {
 		sm.getEntityManager().draw();
 		sm.getPlayerManager().draw();
 		sm.getCollisionManager().handleCollisions();
-		sm.getEntityManager().deleteEntity();
+		//sm.getEntityManager().deleteEntity();
 	}
-	
+	 
 	
 	@Override
 	public void dispose(SceneManager sm) {
@@ -132,6 +123,7 @@ public class PlayScene extends Scene {
 //		bg_texture.dispose();
 		sm.getPlayerManager().dispose();
 		sm.getEntityManager().dispose();
+		sm.dispose();
 	}
 	
 }

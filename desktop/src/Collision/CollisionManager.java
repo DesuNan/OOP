@@ -60,17 +60,32 @@ public class CollisionManager {
 		// If Collided, scenemanager change scene.
 		if (player != null) {
 			for (Entities entity : entityList) {
-				// If player and entity collide
-				if (isCollided(entity, player)) {
-					sm.getIOMan().playSound("hit.ogg");
-					sm.dispose();
-					sm.set(new EndScene(sm));
+				if (entity instanceof Tube) {
+					if (isCollided(entity, player)) {
+						sm.getIOMan().playSound("hit.ogg");
+						//sm.dispose();
+						sm.set(new EndScene(sm));
+					}
+					// Endless loop of tubes.
+					if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0 && entity instanceof Tube) {
+						entity.setX(800);
+					}
+				} else if (entity instanceof Good) {
+					if (isCollided(entity, player)) {
+						sm.getIOMan().playSound("hit.ogg");
+						if(player.getHealth()>0 && player.getHealth()<3){
+							player.setScore(player.getScore()+1);
+						}
+					}
+				} else if (entity instanceof Danger) {
+					if (isCollided(entity, player)) {
+						sm.getIOMan().playSound("hit.ogg");
+						if(player.getHealth()>=1 && player.getHealth()<=3) {
+							player.setHealth(player.getHealth()-1);
+						}
+					}
 				}
-
-				// Endless loop of tubes.
-				if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0 && entity instanceof Tube) {
-					entity.setX(800);
-				}
+			
 				
 				if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0 && entity instanceof Good) {
 					entity.setX(800);
@@ -78,6 +93,7 @@ public class CollisionManager {
 					int speed = random.nextInt(9) + 2;
 					entity.setY(posY);;
 					entity.setSpeed(speed);
+					
 				}
 				
 				if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0 && entity instanceof Danger) {
@@ -86,6 +102,7 @@ public class CollisionManager {
 					int speed = random.nextInt(9) + 2;
 					entity.setY(posY);
 					entity.setSpeed(speed);
+					//sm.getEntityManager().deleteEntity();
 				}
 
 				// Add points for player passing Tube

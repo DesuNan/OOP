@@ -21,6 +21,7 @@ abstract public class Players implements playerMoveable, iCollision {
     private String imagePath;
     private double score = 0;
     private Map<Integer, Runnable> actionsMap = new HashMap<>();
+	private int health;
     
     public Players () {
     	
@@ -69,6 +70,15 @@ abstract public class Players implements playerMoveable, iCollision {
     public void setY(float y) {
     	this.y = y;
     }
+    
+    public int getHealth() {
+		return this.health;
+	}
+	
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
     public void setSpeed(float speed) {
     	this.speed = speed;
     }

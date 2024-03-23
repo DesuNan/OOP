@@ -7,6 +7,8 @@ public class Bird extends Players {
 	private final float GRAVITY = -0.5f; // Gravity effect on the bird
 	private final float JUMP_FORCE = 8f; // The upward force applied when jumping
 	private static Bird instance;
+	private int maxhealth = 3;
+	private int minhealth = 1;
 	private Bird(PlayersManager pm, float x, float y, float speed, String imagePath,  int jumpKeyBind) {
 		// super(pm);
 		this.pm = pm;
@@ -14,6 +16,7 @@ public class Bird extends Players {
 		this.setY(y);
 		this.setSpeed(speed);
 		this.setImage(imagePath);
+		this.setHealth(3);
 		
 		this.addActions(jumpKeyBind, () -> {
 		           	// Apply jump force
@@ -29,7 +32,20 @@ public class Bird extends Players {
 	    }
 	    return instance;
 	}
-
+	
+//	@Override 
+//	public void setHealth(int health) {
+//		if(this.getHealth()>maxhealth) {
+//			this.setHealth(maxhealth);
+//		}
+//		else if(this.getHealth()<minhealth) {
+//			this.setHealth(minhealth);
+//		}
+//		else {
+//			this.setHealth(health);
+//		}
+//	}
+	
 	public int getJumpKeyBind () {
 		return this.getJumpKeyBind();
 	}
@@ -77,7 +93,8 @@ public class Bird extends Players {
 	
 	@Override
 	public void draw(PlayersManager pm) {
-		
+		this.drawHealth(this.getHealth(), pm);
+		System.out.println(this.getHealth());
 		if (pm.getSceneManager().getGameLifeCycle().getStatus() == GameState.Play) {
 		pm.getIOMan().getBatch().draw(pm.getIOMan().getImage(this.getImage()), this.getX(), this.getY());
 		// draw player score
@@ -86,6 +103,18 @@ public class Bird extends Players {
 		else if(pm.getSceneManager().getGameLifeCycle().getStatus() == GameState.End) {
 	
 			pm.getIOMan().displayText("Score: " + this.getScore(), (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (pm.getIOMan().getHeight("gameover.png"))/2);
+		}
+	}
+	
+	public void drawHealth(int count, PlayersManager pm) {
+		int starX = 300;
+		int spaceX = 50;
+		int y = 0;
+		
+		for (int i = 0; i < count; i++) {
+			int x = starX + i * spaceX;
+			pm.getIOMan().getBatch().draw(pm.getIOMan().getImage("Heart.png"),x,y);
+			//sm.getEntityManager().addEntity(new Danger(x ,y , 0, "Heart.png"));
 		}
 	}
 	

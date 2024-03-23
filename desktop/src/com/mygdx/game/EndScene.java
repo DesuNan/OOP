@@ -44,7 +44,6 @@ public class EndScene extends Scene {
 		sm.getPlayerManager().clearAll();
 		sm.getEntityManager().clearAll();
 		sm.getCollisionManager().clearAll();
-		
 	}
 	
 }
