@@ -4,7 +4,7 @@ import Player.*;
 
 public class Bird extends Players {
 	private float velocity = 0; // Bird's vertical velocity
-	private final float GRAVITY = -0.5f; // Gravity effect on the bird
+	private float GRAVITY = -0.5f; // Gravity effect on the bird, allowing for adjustment
 	private final float JUMP_FORCE = 8f; // The upward force applied when jumping
 	private static Bird instance;
 	private int maxhealth = 3;
@@ -33,18 +33,55 @@ public class Bird extends Players {
 	    return instance;
 	}
 	
-//	@Override 
-//	public void setHealth(int health) {
-//		if(this.getHealth()>maxhealth) {
-//			this.setHealth(maxhealth);
-//		}
-//		else if(this.getHealth()<minhealth) {
-//			this.setHealth(minhealth);
-//		}
-//		else {
-//			this.setHealth(health);
-//		}
-//	}
+	public void setHealth(int health) {
+    // Ensure the health value is within the allowed range
+    if (health > maxhealth) {
+        health = maxhealth;
+    } else if (health < minhealth) {
+        health = minhealth;
+    }
+    super.setHealth(health); // Call to the superclass method to actually set the health
+    
+    // Adjust gravity based on the current health
+    adjustGravityBasedOnHealth();
+    // Adjust image based on the current health
+    //updateImageBasedOnHealth();
+	}
+	
+	private void adjustGravityBasedOnHealth() {
+	    // Adjust the gravity based on the bird's current health
+	    switch (this.getHealth()) {
+	        case 3:
+	            this.GRAVITY = -0.5f; // Normal gravity
+	            break;
+	        case 2:
+	            this.GRAVITY = -0.7f; // Increased gravity
+	            break;
+	        case 1:
+	            this.GRAVITY = -0.9f; // Further increased gravity
+	            break;
+	        default:
+	            this.GRAVITY = -0.5f; // Default case to handle unexpected values
+	    }
+	}
+	//private void updateImageBasedOnHealth() {
+	    // Update the bird's sprite image based on its current health
+	    //switch (this.getHealth()) {
+	        //case 3:
+	            //this.setImage("Player.png"); // Bird with 3 health
+	            //break;
+	        //case 2:
+	            //this.setImage("Player2.png"); // Bird with 2 health
+	            //break;
+	        //case 1:
+	            //this.setImage("Player3.png"); // Bird with 1 health
+	            //break;
+	        //default: 
+	            //this.setImage("Player.png"); 
+	    //}
+	//}
+
+
 	
 	public int getJumpKeyBind () {
 		return this.getJumpKeyBind();
