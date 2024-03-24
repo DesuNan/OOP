@@ -23,8 +23,8 @@ public class PlayScene extends Scene {
 		// Set game State, for synchronisation
 		this.sm.getGameLifeCycle().updateStatus(GameState.Play);
 		
-		this.gf = new GoodEntityFactory(sm, 2);
-		this.bf = new BadEntityFactory(sm, 2); 
+		this.gf = new GoodEntityFactory(sm, 1);
+		this.bf = new BadEntityFactory(sm, 1); 
 		
 		this.gf.drawEntities();
 		this.bf.drawEntities();
