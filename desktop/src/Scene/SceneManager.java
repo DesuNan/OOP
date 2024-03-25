@@ -58,6 +58,7 @@ public class SceneManager {
 	}
 	
 	public void pop() {
+		scenes.peek().dispose(this);
 		scenes.pop();
 		iSwapScene.pop();
 	}
@@ -77,6 +78,6 @@ public class SceneManager {
 	}
 	
 	public void dispose() {
-		scenes.peek().dispose(this);
+		// scenes.peek().dispose(this);
 	}
 }

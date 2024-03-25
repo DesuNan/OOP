@@ -25,6 +25,8 @@ public class GameClock {
             @Override
             public void actionPerformed(ActionEvent e) {
                 elapsedTime++; 
+                
+                
             }
         });
     }
@@ -52,11 +54,14 @@ public class GameClock {
     public void draw () {
     	this.text = "Game Time: " + this.elapsedTime;
     	this.ioman.displayText(text,10,20);
+        // this.ioman.displayText(text,10,20);
+    	// this.ioman.displayText("hello", 100, 100);
     	
     }
     
     public void dispose() {
-    	this.ioman.disposeText();
+        this.ioman.disposeText();
+    	// this.ioman.disposeText(this.text);
     }
 
 

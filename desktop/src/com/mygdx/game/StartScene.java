@@ -35,20 +35,16 @@ public class StartScene extends Scene {
 	
 	@Override
 	public void render(SceneManager sm) {
-		bg_texture = sm.getIOMan().getImage("bg.png");
-		message_texture = sm.getIOMan().getImage("message.png");
-		sm.getIOMan().getBatch().draw(bg_texture, 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
-		sm.getIOMan().getBatch().draw(message_texture, (GameLifeCycle.WIDTH / 2) - (sm.getIOMan().getWidth("message.png") / 2), (GameLifeCycle.HEIGHT/2) - 100);
+		sm.getIOMan().draw("bg.png", 0, 0, (float) GameLifeCycle.WIDTH, (float)GameLifeCycle.HEIGHT);
+		sm.getIOMan().draw("message.png", (GameLifeCycle.WIDTH / 2) - (sm.getIOMan().getWidth("message.png") / 2),(float) (GameLifeCycle.HEIGHT/2) - 100);
 	}
 	
 	
 	@Override
 	public void dispose(SceneManager sm) {
-		bg_texture.dispose();
-		message_texture.dispose();
-//		this.sm.getIOMan().disposeBatch();
+		sm.getIOMan().disposeTexture("bg.png");
+		sm.getIOMan().disposeTexture("message.png");
 	}
-
 	
 	
 }

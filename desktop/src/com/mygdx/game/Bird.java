@@ -133,13 +133,13 @@ public class Bird extends Players {
 		this.drawHealth(this.getHealth(), pm);
 		System.out.println(this.getHealth());
 		if (pm.getSceneManager().getGameLifeCycle().getStatus() == GameState.Play) {
-		pm.getIOMan().getBatch().draw(pm.getIOMan().getImage(this.getImage()), this.getX(), this.getY());
+		pm.getIOMan().draw(this.getImage(), this.getX(), this.getY());
 		// draw player score
 		pm.getIOMan().displayText("Score: " + this.getScore(),400,550);
 		}
 		else if(pm.getSceneManager().getGameLifeCycle().getStatus() == GameState.End) {
 	
-			pm.getIOMan().displayText("Score: " + this.getScore(), (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (pm.getIOMan().getHeight("gameover.png"))/2);
+			// pm.getIOMan().displayText("Score: " + this.getScore(), (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (pm.getIOMan().getHeight("gameover.png"))/2);
 		}
 	}
 	
@@ -150,7 +150,7 @@ public class Bird extends Players {
 		
 		for (int i = 0; i < count; i++) {
 			int x = starX + i * spaceX;
-			pm.getIOMan().getBatch().draw(pm.getIOMan().getImage("Heart.png"),x,y);
+			pm.getIOMan().draw("Heart.png",x,y);
 			//sm.getEntityManager().addEntity(new Danger(x ,y , 0, "Heart.png"));
 		}
 	}
@@ -158,6 +158,8 @@ public class Bird extends Players {
 	
 	@Override
 	public void dispose(PlayersManager pm) {
-		pm.getIOMan().disposeBatch();
+		pm.getIOMan().disposeTexture("Heart.png");
+		// pm.disposeText();
+		pm.getIOMan.disposeTexture(this.getImage());
 	}
 }

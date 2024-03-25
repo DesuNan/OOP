@@ -1,7 +1,7 @@
 package InputOutput;
 
 import com.badlogic.gdx.graphics.Texture;
-
+import java.util.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,10 +10,10 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import Player.*;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.audio.Sound;  
 import com.badlogic.gdx.audio.Music;
 
-import com.badlogic.gdx.Input;
+
 
 public class InputOutputManager extends InputAdapter{
 	private SpriteBatch batch;
@@ -21,6 +21,9 @@ public class InputOutputManager extends InputAdapter{
 	private Set<Integer> keysPressed;
 	private Sound sound;
 	private Music music ;//= Gdx.audio.newMusic(Gdx.files.internal("arcade.mp3"));
+	// private BitmapFont font;
+	private Map<String, Integer> textureCount;
+	private List<Texture> textureList;
 	private BitmapFont font;
 	
 	public InputOutputManager () {
@@ -28,6 +31,8 @@ public class InputOutputManager extends InputAdapter{
 		keysPressed = new HashSet<>();
 		Gdx.gl.glClearColor(256, 256, 100, 100);
 		this.font = new BitmapFont();
+		this.textureCount = new HashMap<>();
+	    this.textureList = new ArrayList<>(); 
 		
 	}
 	public PlayersManager getPlayerManager() {
@@ -38,8 +43,64 @@ public class InputOutputManager extends InputAdapter{
 		
 		this.pm = pm;
 	}
+	
+	public void draw(String imgPath, float x, float y) {
+			int count = textureCount.getOrDefault(imgPath,0);
+			Texture texture = null;
+			if (count == 0) {
+				texture = this.getImage(imgPath);
+				textureList.add(texture);
+			}
+			else {
+				for (Texture pic : textureList) {
+					if (pic.toString() == imgPath) {
+						texture = pic;
+					}
+				}
+			}
+			
+		    textureCount.put(imgPath, textureCount.getOrDefault(imgPath,0) +1);
+		    this.getBatch().draw(texture, x, y);
+		  }
+
+		  public void disposeTexture (String imgPath) {
+		    int count = textureCount.getOrDefault(imgPath,0);
+		    if (count > 0) {
+		      count --;
+		      textureCount.put(imgPath, count);
+		    }
+		    else if (count == 0) {
+		      // dispose all textures
+		      for (Texture texture: textureList) {
+		        if (texture.toString() == imgPath) {
+		          texture.dispose();
+		          textureList.remove(texture);
+		        }
+		      }
+		    }
+
+		  }
 	  
-	  
+		  public void draw(String imgPath, float x, float y, float width, float height) {
+				int count = textureCount.getOrDefault(imgPath,0);
+				Texture texture = null;
+				if (count == 0) {
+					texture = this.getImage(imgPath);
+					textureList.add(texture);
+				}
+				else {
+					for (Texture pic : textureList) {
+						if (pic.toString() == imgPath) {
+							texture = pic;
+						}
+					}
+				}
+				
+			    textureCount.put(imgPath, textureCount.getOrDefault(imgPath,0) +1);
+			    this.getBatch().draw(texture, x, y, width, height);
+			  }
+
+			  
 	  public void createBatch() {
 	    this.batch = new SpriteBatch();
 	  }
@@ -55,7 +116,7 @@ public class InputOutputManager extends InputAdapter{
 	    this.disposeMusic();
 	  }
 	  
-	  public SpriteBatch getBatch() {
+	 public SpriteBatch getBatch() {
 	    return this.batch;
 	  }
 	  
@@ -132,13 +193,15 @@ public class InputOutputManager extends InputAdapter{
 	            this.music.dispose();
 	        }
 	    }
-	 
-	 public void displayText (String text, float x, float y) {
+
+	public void displayText (String text, float x, float y) {
 		 this.font.draw(this.getBatch(), text, x, y);
 	 }
-	 
+	
 	 public void disposeText() {
 		 this.font.dispose();
 	 }
+	 
+	
 	  
 }

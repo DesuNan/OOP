@@ -15,12 +15,12 @@ public class Good extends Entities{
 	
 	@Override
 	public void draw(EntitiesManager em) {
-		em.getIOMan().getBatch().draw(em.getIOMan().getImage(this.getImagePath()), this.getX(), this.getY());
+		em.getIOMan().draw(this.getImagePath(), this.getX(), this.getY());
 	}
 	
 	@Override
 	public void dispose(EntitiesManager em) {
-		em.getIOMan().disposeBatch();
+		em.getIOMan().disposeTexture(this.getImagePath());
 	}
 
 	@Override

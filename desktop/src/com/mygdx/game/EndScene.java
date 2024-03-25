@@ -33,7 +33,9 @@ public class EndScene extends Scene {
 		gameover_texture = sm.getIOMan().getImage("gameover.png");
 		sm.getIOMan().getBatch().draw(bg_texture, 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
 		sm.getIOMan().getBatch().draw(gameover_texture, (GameLifeCycle.WIDTH / 2) - (sm.getIOMan().getWidth("gameover.png") / 2), (GameLifeCycle.HEIGHT/2));
-		//sm.getIOMan().displayText("Score: ", (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (sm.getIOMan().getHeight("gameover.png"))/2);
+		// sm.getIOMan().displayText("Score: ", (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (sm.getIOMan().getHeight("gameover.png"))/2);
+//			sm.getIOMan().displayText(sm.getPlayerManager(), (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (sm.getIOMan().getHeight("gameover.png"))/2);
+		
 	}
 	
 	@Override
