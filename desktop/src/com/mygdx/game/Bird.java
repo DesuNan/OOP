@@ -136,7 +136,7 @@ public class Bird extends Players {
 		System.out.println(this.getHealth());
 		if (pm.getSceneManager().getGameLifeCycle().getStatus() == GameState.Play) {
 		pm.getIOMan().draw(this.getImage(), this.getX(), this.getY());
-	    updateImageBasedOnHealth();
+	    this.updateImageBasedOnHealth();
 
 		// draw player score
 		pm.getIOMan().displayText("Score: " + this.getScore(),400,550);
