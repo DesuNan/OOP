@@ -45,7 +45,6 @@ public class Bird extends Players {
     // Adjust gravity based on the current health
     adjustGravityBasedOnHealth();
     // Adjust image based on the current health
-    //updateImageBasedOnHealth();
 	}
 	
 	private void adjustGravityBasedOnHealth() {
@@ -64,22 +63,25 @@ public class Bird extends Players {
 	            this.GRAVITY = -0.5f; // Default case to handle unexpected values
 	    }
 	}
-	//private void updateImageBasedOnHealth() {
-	    // Update the bird's sprite image based on its current health
-	    //switch (this.getHealth()) {
-	        //case 3:
-	            //this.setImage("Player.png"); // Bird with 3 health
-	            //break;
-	        //case 2:
-	            //this.setImage("Player2.png"); // Bird with 2 health
-	            //break;
-	        //case 1:
-	            //this.setImage("Player3.png"); // Bird with 1 health
-	            //break;
-	        //default: 
-	            //this.setImage("Player.png"); 
-	    //}
-	//}
+	private void updateImageBasedOnHealth() {
+	      // Update the bird's sprite image based on its current health
+	      switch (this.getHealth()) {
+	          case 3:
+	        	  pm.getIOMan().disposeTexture(this.getImage());
+	              this.setImage("Player.png"); // Bird with 3 health
+	              break;
+	          case 2:
+	        	  pm.getIOMan().disposeTexture(this.getImage());
+	              this.setImage("Player2.png"); // Bird with 2 health
+	              break;
+	          case 1:
+	        	  pm.getIOMan().disposeTexture(this.getImage());
+	              this.setImage("Player3.png"); // Bird with 1 health
+	              break;
+	          default:
+	              this.setImage("Player.png"); 
+	      }
+	  }
 
 
 	
@@ -134,6 +136,8 @@ public class Bird extends Players {
 		System.out.println(this.getHealth());
 		if (pm.getSceneManager().getGameLifeCycle().getStatus() == GameState.Play) {
 		pm.getIOMan().draw(this.getImage(), this.getX(), this.getY());
+	    updateImageBasedOnHealth();
+
 		// draw player score
 		pm.getIOMan().displayText("Score: " + this.getScore(),400,550);
 		}
@@ -160,6 +164,6 @@ public class Bird extends Players {
 	public void dispose(PlayersManager pm) {
 		pm.getIOMan().disposeTexture("Heart.png");
 		// pm.disposeText();
-		pm.getIOMan.disposeTexture(this.getImage());
+		pm.getIOMan().disposeTexture(this.getImage());
 	}
 }
