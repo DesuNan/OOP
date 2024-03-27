@@ -69,7 +69,8 @@ public class CollisionManager {
 					// Endless loop of tubes.
 					if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0 && entity instanceof Tube) {
 						entity.setX(800);
-					}
+						player.setScore(player.getScore() + 5);
+						sm.getIOMan().playSound("point.ogg");}
 				} else if (entity instanceof Good) {
 				    Good goodEntity = (Good) entity; // Cast for easy access to Danger methods
 					if (isCollided(entity, player) && !goodEntity.hasCollidedWithPlayer()) {
@@ -127,12 +128,12 @@ public class CollisionManager {
 				}
 
 				// Add points for player passing Tube
-				if (entity.getX() + entity.getWidth(sm.getIOMan()) < player.getX() && entity instanceof Tube) {
+				if (entity.getX() + entity.getWidth(sm.getIOMan()) <= player.getX() && entity instanceof Tube ) {
 					// 10 points per tube set
 					// 0.25 because it takes 40 miliseconds to pass the tube.
-					player.setScore(player.getScore() + (0.25));
-					System.out.println("Player Score: " + player.getScore());
-					sm.getIOMan().playSound("point.ogg");
+					// player.setScore(player.getScore() + (0.25));
+					// System.out.println("Player Score: " + player.getScore());
+					// sm.getIOMan().playSound("point.ogg");
 
 				}
 			}

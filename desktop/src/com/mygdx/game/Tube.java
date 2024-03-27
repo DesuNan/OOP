@@ -28,6 +28,5 @@ public class Tube extends Entities {
 		// TODO Auto-generated method stub
 		this.setX(this.getX() - this.getSpeed());
 	}
-
 	
 }

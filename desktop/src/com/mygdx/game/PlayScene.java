@@ -31,7 +31,8 @@ public class PlayScene extends Scene {
 		
 		sm.getPlayerManager().addPlayer(Bird.getInstance(sm.getPlayerManager(), 100,250,12,"Player.png",Input.Keys.SPACE));
 		sm.getEntityManager().addEntity(new Tube(800 ,-100 ,5 , "bottomtube.png"));
-		sm.getEntityManager().addEntity(new Tube(800 ,500,5, "toptube.png"));
+		sm.getIOMan().playMusic("01 game-game_0.ogg");
+//sm.getEntityManager().addEntity(new Tube(800 ,500,5, "toptube.png"));
 		
 		
 	}

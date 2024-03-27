@@ -8,4 +8,5 @@ public interface iCollision {
     public float getY();
     public float getWidth(InputOutputManager ioman);
     public float getHeight(InputOutputManager ioman);
+    
 }

@@ -14,6 +14,7 @@ public class StartScene extends Scene {
 		super(sm);
 		// Set game State, for synchronisation
 		this.sm.getGameLifeCycle().updateStatus(GameState.Start);
+		this.sm.getIOMan().playMusic("one.mp3");
 	}
 	
 	@Override

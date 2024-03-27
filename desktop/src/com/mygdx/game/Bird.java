@@ -91,12 +91,6 @@ public class Bird extends Players {
 
 	public void setJumpKeyBind (int keyBind) {
 		this.deleteActions(this.getJumpKeyBind());
-		this.addActions(keyBind, () -> {
-		           	// Apply jump force
-		            this.velocity = JUMP_FORCE;
-		            //Play jump sound
-		            pm.getIOMan().playSound("jump.mp3");
-		});
 	}
 	
 	

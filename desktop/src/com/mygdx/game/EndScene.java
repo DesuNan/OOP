@@ -34,8 +34,10 @@ public class EndScene extends Scene {
 		sm.getIOMan().getBatch().draw(bg_texture, 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
 		sm.getIOMan().getBatch().draw(gameover_texture, (GameLifeCycle.WIDTH / 2) - (sm.getIOMan().getWidth("gameover.png") / 2), (GameLifeCycle.HEIGHT/2));
 		// sm.getIOMan().displayText("Score: ", (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (sm.getIOMan().getHeight("gameover.png"))/2);
-//			sm.getIOMan().displayText(sm.getPlayerManager(), (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (sm.getIOMan().getHeight("gameover.png"))/2);
+		sm.getIOMan().displayText("Score: " + String.valueOf(sm.getPlayerManager().getAllPlayers().get(0).getScore()), (float) (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (sm.getIOMan().getHeight("gameover.png"))/2);
 		
+		// Can do this because player is singleton design pattern
+		System.out.println(sm.getPlayerManager().getAllPlayers().get(0).getScore());
 	}
 	
 	@Override
@@ -46,6 +48,7 @@ public class EndScene extends Scene {
 		sm.getPlayerManager().clearAll();
 		sm.getEntityManager().clearAll();
 		sm.getCollisionManager().clearAll();
+		sm.getIOMan().disposeText();
 	}
 	
 }
