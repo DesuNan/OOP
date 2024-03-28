@@ -1,9 +1,12 @@
 package GameLayer.Player;
 import java.util.Map;
 import GameEngine.*;
+import GameEngine.Collision.iCollision;
 import GameEngine.GameLifecycle.GameState;
+import GameEngine.InputOutput.InputOutputManager;
 import GameEngine.Player.Players;
 import GameEngine.Player.PlayersManager;
+import GameLayer.AIEntities.Tube;
 
 public class Bird extends Players {
 	private float velocity = 0; // Bird's vertical velocity
@@ -12,6 +15,7 @@ public class Bird extends Players {
 	private static Bird instance;
 	private int maxhealth = 3;
 	private int minhealth = 1;
+	private boolean passedTube;
 	private Bird(PlayersManager pm, float x, float y, float speed, String imagePath,  int jumpKeyBind) {
 		// super(pm);
 		this.pm = pm;
@@ -20,6 +24,7 @@ public class Bird extends Players {
 		this.setSpeed(speed);
 		this.setImage(imagePath);
 		this.setHealth(3);
+		this.setPassed(false);
 		
 		this.addActions(jumpKeyBind, () -> {
 		           	// Apply jump force
@@ -34,6 +39,12 @@ public class Bird extends Players {
 	        instance = new Bird(pm, x, y, speed, imagePath, jumpKeyBind);
 	    }
 	    return instance;
+	}
+	public boolean getPassed () {
+		return this.passedTube;
+	}
+	public void setPassed (boolean bool) {
+		 this.passedTube = bool;
 	}
 	
 	public void setHealth(int health) {
@@ -163,4 +174,20 @@ public class Bird extends Players {
 		// pm.disposeText();
 		pm.getIOMan().disposeTexture(this.getImage());
 	}
+	@Override
+	public void handleCollisions(InputOutputManager ioman, iCollision entity) {
+		// TODO Auto-generated method stub
+		if (entity instanceof Tube && !this.getPassed()) {
+			this.setScore(this.getScore() + 10);
+			this.setPassed(true);
+			ioman.playSound("point.ogg");
+		}
+	}
+	@Override
+	public void reposition(InputOutputManager ioman) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }

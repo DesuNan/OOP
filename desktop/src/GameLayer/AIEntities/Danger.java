@@ -1,6 +1,11 @@
 package GameLayer.AIEntities;
+import java.util.Random;
+
 import GameEngine.AIEntities.Entities;
 import GameEngine.AIEntities.EntitiesManager;
+import GameEngine.Collision.iCollision;
+import GameEngine.InputOutput.InputOutputManager;
+import GameLayer.Player.*;
 
 public class Danger extends Entities {
 	
@@ -41,6 +46,27 @@ public class Danger extends Entities {
 
 	public void setCollidedWithPlayer(boolean collided) {
 	    this.hasCollidedWithPlayer = collided;
+	}
+
+	@Override
+	public void handleCollisions(InputOutputManager ioman, iCollision player) {
+		// TODO Auto-generated method stub
+		Bird bird = (Bird) player;
+		if (bird.getHealth()>1 && bird.getHealth()<=3 && !this.hasCollidedWithPlayer) {
+		bird.setHealth(bird.getHealth() - 1);
+		this.hasCollidedWithPlayer = true;
+		ioman.playSound("hit.ogg");
+		}
+	}
+
+	@Override
+	public void reposition(InputOutputManager ioman) {
+		// TODO Auto-generated method stub
+		Random random = new Random();
+		this.setX(800);
+		this.setY(random.nextInt(600));
+		this.setSpeed(random.nextInt(9) + 2);
+		this.hasCollidedWithPlayer = false;
 	}
 
 	

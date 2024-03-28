@@ -1,7 +1,6 @@
 package GameEngine.Collision;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Random;
 import GameEngine.AIEntities.Entities;
@@ -38,97 +37,45 @@ public class CollisionManager {
 	public void deleteCollidable(iCollision collidable) {
 		collidables.remove(collidable);
 	}
-	
 	public boolean isCollided(iCollision entity1, iCollision entity2) {
 		return entity1.getX() < entity2.getX() + entity2.getWidth(sm.getIOMan())
 				&& entity1.getX() + entity1.getWidth(sm.getIOMan()) > entity2.getX()
 				&& entity1.getY() < entity2.getY() + entity2.getHeight(sm.getIOMan())
 				&& entity1.getY() + entity1.getHeight(sm.getIOMan()) > entity2.getY();
 	}
+	
+	public boolean isPassed(iCollision entity1, iCollision entity2) {
+		return entity1.getX() < entity2.getX() && entity1.getX() > 0; 
+	}
+	
+	public boolean isBeyond(iCollision entity) {
+		return (entity.getX() + entity.getWidth(sm.getIOMan())) < 0;
+		
+	}
 
-	public void handleCollisions() {
-		Random random = new Random();
-
-		Players player = null;
-		List<Entities> entityList = new ArrayList<>();
-		for (iCollision collidable : this.getCollidablesList()) {
-			if (collidable instanceof Players) {
-				player = (Players) collidable;
-			} else if (collidable instanceof Entities) {
-				entityList.add((Entities) collidable);
-			}
-		}
-		// Check collisions between bird and each tube
-		// If Collided, scenemanager change scene.
-		if (player != null) {
-			for (Entities entity : entityList) {
-				if (entity instanceof Tube) {
-					if (isCollided(entity, player)) {
-						sm.getIOMan().playSound("hit.ogg");
-						//sm.dispose();
-						sm.set(SceneType.END_SCENE);
-					}
-					// Endless loop of tubes.
-					if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0 && entity instanceof Tube) {
-						entity.setX(800);
-						player.setScore(player.getScore() + 5);
-						sm.getIOMan().playSound("point.ogg");}
-				} else if (entity instanceof Good) {
-				    Good goodEntity = (Good) entity; // Cast for easy access to Danger methods
-					if (isCollided(entity, player) && !goodEntity.hasCollidedWithPlayer()) {
-			            goodEntity.setCollidedWithPlayer(true); // Mark as collided
-						sm.getIOMan().playSound("hit.ogg");
-						if(player.getHealth()>0 && player.getHealth()<3){
-							player.setHealth(player.getHealth()+1);
+	
+	public void handleCollision() {
+		// iterate through all icollisions and get type
+		for(iCollision player: this.getCollidablesList()) {
+			if (player instanceof Players) {
+				for (iCollision entity: this.getCollidablesList()) {
+					if (entity instanceof Entities) {
+						// bird collides with collidable
+						if (isCollided(entity, player)) {
+							entity.handleCollisions(sm.getIOMan(),player);
+						}
+						// tube passes bird
+						if (isPassed(entity,player)) {
+							player.handleCollisions(sm.getIOMan(), entity);
+						}
+						// beyond border/screen
+						if (isBeyond(entity)) {
+							entity.reposition(sm.getIOMan());
 						}
 					}
-					if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0) {
-				        entity.setX(800);
-				        int posY = random.nextInt(600);
-				        int speed = random.nextInt(9) + 2;
-				        entity.setY(posY);
-				        entity.setSpeed(speed);
-				        goodEntity.setCollidedWithPlayer(false); // Reset collision flag
-				    }
-				} else if (entity instanceof Danger) {
-				    Danger dangerEntity = (Danger) entity; // Cast for easy access to Danger methods
-					if (isCollided(entity, player) && !dangerEntity.hasCollidedWithPlayer()) {
-						sm.getIOMan().playSound("hit.ogg");
-						if(player.getHealth()>1 && player.getHealth()<=3) {
-							player.setHealth(player.getHealth()-1);
-				            dangerEntity.setCollidedWithPlayer(true); // Mark as collided
-						}
-						
-					}
-					if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0) {
-				        entity.setX(800);
-				        int posY = random.nextInt(600);
-				        int speed = random.nextInt(9) + 2;
-				        entity.setY(posY);
-				        entity.setSpeed(speed);
-				        dangerEntity.setCollidedWithPlayer(false); // Reset collision flag
-				    }
-				}
-			
-				
-				if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0 && entity instanceof Good) {
-					entity.setX(800);
-					int posY = random.nextInt(600);
-					int speed = random.nextInt(9) + 2;
-					entity.setY(posY);;
-					entity.setSpeed(speed);
-					
-				}
-				
-				if (entity.getX() + entity.getWidth(sm.getIOMan()) < 0 && entity instanceof Danger) {
-					entity.setX(800);
-					int posY = random.nextInt(600);
-					int speed = random.nextInt(9) + 2;
-					entity.setY(posY);
-					entity.setSpeed(speed);
 				}
 			}
 		}
 	}
-
+	
 }

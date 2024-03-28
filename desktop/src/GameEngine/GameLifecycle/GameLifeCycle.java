@@ -2,16 +2,11 @@ package GameEngine.GameLifecycle;
 
 
 import com.badlogic.gdx.ApplicationAdapter;
-
-
-
 import com.badlogic.gdx.Gdx;
-
 import GameEngine.InputOutput.InputOutputManager;
 import GameEngine.NonScene.GameClock;
 import GameEngine.Scene.SceneManager;
 import GameEngine.Scene.SceneType;
-import GameLayer.Scenes.StartScene;
 
 
 public class GameLifeCycle extends ApplicationAdapter {

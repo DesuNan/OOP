@@ -59,7 +59,7 @@ public class PlayScene extends Scene {
 		sm.getIOMan().draw("bg.png", 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
 		sm.getEntityManager().draw();
 		sm.getPlayerManager().draw();
-		sm.getCollisionManager().handleCollisions();
+		sm.getCollisionManager().handleCollision();
 	}
 	 
 	

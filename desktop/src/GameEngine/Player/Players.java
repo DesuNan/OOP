@@ -1,18 +1,9 @@
 package GameEngine.Player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-
-import Collision.*;
 import GameEngine.Collision.iCollision;
 import GameEngine.InputOutput.InputOutputManager;
-
-import java.util.List;
 import java.util.Map;
-
-import com.badlogic.gdx.Input;
-import com.mygdx.game.*;
 
 abstract public class Players implements playerMoveable, iCollision {
 	protected PlayersManager pm;

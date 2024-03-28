@@ -1,6 +1,5 @@
 package GameLayer.Scenes.SceneFactories;
 
-import GameEngine.*;
 import GameEngine.Scene.Scene;
 import GameEngine.Scene.SceneManager;
 

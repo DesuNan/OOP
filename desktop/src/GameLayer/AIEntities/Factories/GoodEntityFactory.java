@@ -1,12 +1,9 @@
 package GameLayer.AIEntities.Factories;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import GameEngine.Scene.SceneManager;
 import GameLayer.AIEntities.Good;
-import Scene.*;
 
 public class GoodEntityFactory implements CollectibleFactory {
 
