@@ -21,14 +21,11 @@ public class EntitiesManager {
     	this.aiMoveables = new ArrayList<>();
         
     }
-    public void clearAll () {
-    	this.getAllMoveables().clear();
-    	this.getEntityList().clear();
-    }
-    
     public InputOutputManager getIOMan() {
     	return this.ioman;
     }
+    
+
 
     public List<Entities> getEntityList() {
     	return this.entityList;
@@ -70,6 +67,17 @@ public class EntitiesManager {
     	}
     }
     
+    public void clearAll () {
+    	this.getAllMoveables().clear();
+    	this.getEntityList().clear();
+    }
+    
+    public void handleMove() {
+    	for (aiMoveable imove: aiMoveables) {
+    		imove.move();
+    	}
+    }
+    
     public void draw() {
     	if (entityList.isEmpty()) {} 
     	 
@@ -83,41 +91,10 @@ public class EntitiesManager {
     	
     }
     
-    public void handleMove() {
-    	for (aiMoveable imove: aiMoveables) {
-    		imove.move();
-    	}
-    }
-    
     public void dispose() {
     	for (Entities entity: entityList) {
     		entity.dispose(this);
     	}
     }
-    
-/*
-	@Override
-	public void moveAIControlled() {
-		// TODO Auto-generated method stub
-		for (Entities entity: entityList) {
-    		// if ai controlled
-			if(entity.isUserControlled() == false) {
-				entity.move();
-			}
-    	}
-		
-	}
 
-	@Override
-	public void moveUserControlled() {
-		// TODO Auto-generated method stub'
-		for (Entities entity: entityList) {
-    		// if not ai controlled
-			if(entity.isUserControlled() == true) {
-				entity.move();
-			}
-    	}
-		
-	}
-	*/
 }

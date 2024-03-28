@@ -2,14 +2,10 @@ package GameEngine.Collision;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import GameEngine.AIEntities.Entities;
 import GameEngine.Player.Players;
 import GameEngine.Scene.SceneManager;
-import GameEngine.Scene.SceneType;
-import GameLayer.AIEntities.Danger;
-import GameLayer.AIEntities.Good;
-import GameLayer.AIEntities.Tube;
+
 
 
 public class CollisionManager {

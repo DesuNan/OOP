@@ -20,7 +20,7 @@ public class GameLifeCycle extends ApplicationAdapter {
 	public GameLifeCycle () {
 		this.GameStatus = GameState.Start;
 	}
-
+	
 	public GameState getStatus() {
 		return this.GameStatus;
 	}

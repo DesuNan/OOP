@@ -1,6 +1,5 @@
 package GameLayer.Player;
 import java.util.Map;
-import GameEngine.*;
 import GameEngine.Collision.iCollision;
 import GameEngine.GameLifecycle.GameState;
 import GameEngine.InputOutput.InputOutputManager;
@@ -138,6 +137,7 @@ public class Bird extends Players {
 	    }
 	}
 	
+	// draw player and its attributes
 	@Override
 	public void draw(PlayersManager pm) {
 		this.drawHealth(this.getHealth(), pm);
@@ -149,12 +149,10 @@ public class Bird extends Players {
 		// draw player score
 		pm.getIOMan().displayText("Score: " + this.getScore(),400,550);
 		}
-		else if(pm.getSceneManager().getGameLifeCycle().getStatus() == GameState.End) {
-	
-			// pm.getIOMan().displayText("Score: " + this.getScore(), (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (pm.getIOMan().getHeight("gameover.png"))/2);
-		}
+		
 	}
 	
+	// draw hearts
 	public void drawHealth(int count, PlayersManager pm) {
 		int starX = 300;
 		int spaceX = 50;
@@ -163,7 +161,6 @@ public class Bird extends Players {
 		for (int i = 0; i < count; i++) {
 			int x = starX + i * spaceX;
 			pm.getIOMan().draw("Heart.png",x,y);
-			//sm.getEntityManager().addEntity(new Danger(x ,y , 0, "Heart.png"));
 		}
 	}
 	
@@ -186,7 +183,6 @@ public class Bird extends Players {
 	@Override
 	public void reposition(InputOutputManager ioman) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	

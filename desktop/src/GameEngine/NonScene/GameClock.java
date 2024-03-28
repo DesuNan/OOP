@@ -15,15 +15,11 @@ public class GameClock {
     
     public GameClock(InputOutputManager ioman) {
     	this.ioman=ioman;
-  
-    	
         // Increases the timer by 1 every 1000 miliseconds.
         this.timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                elapsedTime++; 
-                
-                
+                elapsedTime++;                 
             }
         });
     }

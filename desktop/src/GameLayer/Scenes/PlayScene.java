@@ -11,6 +11,7 @@ import GameEngine.Scene.SceneType;
 import GameLayer.AIEntities.Tube;
 import GameLayer.AIEntities.Factories.BadEntityFactory;
 import GameLayer.AIEntities.Factories.GoodEntityFactory;
+import GameLayer.AIEntities.Factories.TubeEntityFactory;
 import GameLayer.Player.Bird;
 
 public class PlayScene extends Scene {
@@ -19,6 +20,7 @@ public class PlayScene extends Scene {
 
 	private GoodEntityFactory gf;
 	private BadEntityFactory bf;
+	private TubeEntityFactory tf;
 
 	public PlayScene (InputOutputManager ioman, GameLifeCycle gm, SceneManager sm) {
 		super(sm);
@@ -26,14 +28,16 @@ public class PlayScene extends Scene {
 		// Set game State, for synchronisation
 		this.sm.getGameLifeCycle().updateStatus(GameState.Play);
 		
-		this.gf = new GoodEntityFactory(sm, 1);
-		this.bf = new BadEntityFactory(sm, 1); 
+		this.gf = new GoodEntityFactory(sm, 2);
+		this.bf = new BadEntityFactory(sm, 2); 
+		this.tf = new TubeEntityFactory(sm, 1);
 		
 		this.gf.drawEntities();
 		this.bf.drawEntities();
+		this.tf.drawEntities();
 		
 		sm.getPlayerManager().addPlayer(Bird.getInstance(sm.getPlayerManager(), 100,250,12,"Player.png",Input.Keys.SPACE));
-		sm.getEntityManager().addEntity(new Tube(800 ,-100 ,5 , "bottomtube.png"));
+		// sm.getEntityManager().addEntity(new Tube(800 ,-100 ,5 , "bottomtube.png"));
 		sm.getIOMan().playMusic("01 game-game_0.ogg");
 		
 		
