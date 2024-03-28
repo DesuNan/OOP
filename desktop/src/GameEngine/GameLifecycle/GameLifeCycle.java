@@ -11,7 +11,7 @@ import GameEngine.Scene.SceneType;
 
 public class GameLifeCycle extends ApplicationAdapter {
 	public static final int WIDTH = 480;
-	public static final int HEIGHT = 800;
+	public static final int HEIGHT = 600;
 	private SceneManager sm;
 	private GameClock clock;
 	private GameState GameStatus;
@@ -53,12 +53,6 @@ public class GameLifeCycle extends ApplicationAdapter {
 		else if (this.getStatus()==GameState.Play) {
 			this.clock.start();
 			this.clock.draw();
-		}
-		else if (this.getStatus() == GameState.Pause ){
-			this.clock.stop();
-			this.clock.draw();
-			this.sm.set(SceneType.PAUSE_SCENE);
-			
 		}
 		else if (this.getStatus() == GameState.End){
 			this.clock.stop();

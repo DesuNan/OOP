@@ -49,7 +49,7 @@ public class Tube extends Entities {
 		// TODO Auto-generated method stub
 		Random random = new Random();
 		this.setX(800);
-		this.setY(random.nextInt(30));
+		this.setY(-random.nextInt(251));
 		this.setSpeed(random.nextInt(9) + 2);
 		Bird bird = (Bird) ioman.getPlayerManager().getAllPlayers().get(0);
 		bird.setPassed(false);
