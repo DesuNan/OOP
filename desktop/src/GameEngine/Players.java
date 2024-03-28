@@ -1,16 +1,15 @@
-package Player;
+package GameEngine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import Collision.*;
+
 import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Input;
-
-import InputOutput.InputOutputManager;
 import com.mygdx.game.*;
 
 abstract public class Players implements playerMoveable, iCollision {

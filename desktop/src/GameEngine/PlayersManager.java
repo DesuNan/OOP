@@ -1,9 +1,8 @@
-package Player;
+package GameEngine;
 
 import java.util.*;
 import Scene.*;
 import Collision.*;
-import InputOutput.InputOutputManager;
 
 public class PlayersManager{
 	private InputOutputManager ioman;

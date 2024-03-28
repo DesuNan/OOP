@@ -1,13 +1,11 @@
-package com.mygdx.game;
+package GameLayer;
 
 
-import com.badlogic.gdx.graphics.Texture;
 
-import Scene.*;
+
+import GameEngine.*;
 
 public class EndScene extends Scene {
-	private Texture bg_texture;
-	private Texture gameover_texture;
 	
 	public EndScene (SceneManager sm) {
 		super(sm);
@@ -29,11 +27,9 @@ public class EndScene extends Scene {
 	
 	@Override
 	public void render(SceneManager sm) {
-		bg_texture = sm.getIOMan().getImage("bg.png");
-		gameover_texture = sm.getIOMan().getImage("gameover.png");
-		sm.getIOMan().getBatch().draw(bg_texture, 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
-		sm.getIOMan().getBatch().draw(gameover_texture, (GameLifeCycle.WIDTH / 2) - (sm.getIOMan().getWidth("gameover.png") / 2), (GameLifeCycle.HEIGHT/2));
-		// sm.getIOMan().displayText("Score: ", (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (sm.getIOMan().getHeight("gameover.png"))/2);
+		
+		sm.getIOMan().draw("bg.png", 0, 0, GameLifeCycle.WIDTH, GameLifeCycle.HEIGHT);
+		sm.getIOMan().draw("gameover.png", (GameLifeCycle.WIDTH / 2) - (sm.getIOMan().getWidth("gameover.png") / 2), (GameLifeCycle.HEIGHT/2));
 		sm.getIOMan().displayText("Score: " + String.valueOf(sm.getPlayerManager().getAllPlayers().get(0).getScore()), (float) (GameLifeCycle.WIDTH/2) - 50 ,(GameLifeCycle.HEIGHT/2) - (sm.getIOMan().getHeight("gameover.png"))/2);
 		
 		// Can do this because player is singleton design pattern

@@ -1,14 +1,11 @@
-package com.mygdx.game;
+package GameLayer;
 
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
-import Scene.*;
-import com.badlogic.gdx.Input;
+
+import GameEngine.*;
 
 
 public class StartScene extends Scene {
-	private Texture bg_texture;
-	private Texture message_texture;
+
 	
 	public StartScene (SceneManager sm) {
 		super(sm);
@@ -24,9 +21,7 @@ public class StartScene extends Scene {
 			sm.dispose();
 			sm.set(new PlayScene(sm));
 		}
-		if(sm.getIOMan().keyPressOnce(Input.Keys.UP)) {
-			this.sm.getGameLifeCycle().updateStatus(GameState.Pause);
-		};
+		
 	}
 	
 	@Override

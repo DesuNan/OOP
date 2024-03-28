@@ -1,4 +1,4 @@
-package Collision;
+package GameEngine;
 
 import java.util.ArrayList;
 
@@ -8,11 +8,16 @@ import java.util.Random;
 import Scene.*;
 import Player.*;
 import com.mygdx.game.*;
-import Collision.iCollision;
+
 import Entity.*;
+import GameEngine.iCollision;
+import GameLayer.Danger;
+import GameLayer.EndScene;
+import GameLayer.Good;
+import GameLayer.Tube;
 
 public class CollisionManager {
-	private SceneManager sm;
+	protected SceneManager sm;
 	private List<iCollision> collidables;
 
 	public CollisionManager(SceneManager sm) {
@@ -49,7 +54,7 @@ public class CollisionManager {
 
 		Players player = null;
 		List<Entities> entityList = new ArrayList<>();
-		for (iCollision collidable : this.collidables) {
+		for (iCollision collidable : this.getCollidablesList()) {
 			if (collidable instanceof Players) {
 				player = (Players) collidable;
 			} else if (collidable instanceof Entities) {
@@ -124,17 +129,6 @@ public class CollisionManager {
 					int speed = random.nextInt(9) + 2;
 					entity.setY(posY);
 					entity.setSpeed(speed);
-					//sm.getEntityManager().deleteEntity();
-				}
-
-				// Add points for player passing Tube
-				if (entity.getX() + entity.getWidth(sm.getIOMan()) <= player.getX() && entity instanceof Tube ) {
-					// 10 points per tube set
-					// 0.25 because it takes 40 miliseconds to pass the tube.
-					// player.setScore(player.getScore() + (0.25));
-					// System.out.println("Player Score: " + player.getScore());
-					// sm.getIOMan().playSound("point.ogg");
-
 				}
 			}
 		}

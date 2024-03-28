@@ -1,6 +1,6 @@
-package com.mygdx.game;
+package GameLayer;
 import java.util.Map;
-import Player.*;
+import GameEngine.*;
 
 public class Bird extends Players {
 	private float velocity = 0; // Bird's vertical velocity

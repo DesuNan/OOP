@@ -1,15 +1,12 @@
-package com.mygdx.game;
+package GameEngine;
 
 
 import com.badlogic.gdx.ApplicationAdapter;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import InputOutput.*;
-import Scene.*;
+import com.badlogic.gdx.Gdx;
+import GameLayer.StartScene;
 
 
 public class GameLifeCycle extends ApplicationAdapter {
@@ -18,7 +15,6 @@ public class GameLifeCycle extends ApplicationAdapter {
 	private SceneManager sm;
 	private GameClock clock;
 	private GameState GameStatus;
-	private GameState prevStatus;
 	private InputOutputManager ioman;
 	
 	public GameLifeCycle () {
@@ -39,9 +35,8 @@ public class GameLifeCycle extends ApplicationAdapter {
 		this.ioman.createBatch();
 		sm = new SceneManager(ioman, this);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
+		this.clock = new GameClock(ioman);	
 		sm.push(new StartScene(sm));
-		this.clock = new GameClock(ioman, this);	
-		
 	}
 
 	@Override
@@ -61,7 +56,7 @@ public class GameLifeCycle extends ApplicationAdapter {
 		else if (this.getStatus() == GameState.Pause ){
 			this.clock.stop();
 			this.clock.draw();
-			this.sm.set(new PauseScene(this.sm));
+			// this.sm.set(new PauseScene(this.sm));
 			
 		}
 		else if (this.getStatus() == GameState.End){
@@ -71,28 +66,6 @@ public class GameLifeCycle extends ApplicationAdapter {
 		}
 	
 		this.ioman.stopBatch();
-		
-		/*
-		this.updateStatus(sm.getCurrentGameStatus());
-		
-		// Clear screen each time before drawing
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		sm.update(Gdx.graphics.getDeltaTime());
-		sm.render(batch);
-		this.clock.draw();
-		
-		
-		// Check GameState and communicate with clock
-		if (this.GameStatus == GameState.Start) {
-			this.clock.resetClock();
-		}
-		else if (this.GameStatus == GameState.Play) {
-			this.clock.start();
-		}
-		else if (this.GameStatus == GameState.End) {
-			this.clock.stop();
-		}
-		*/
 
 	}
 

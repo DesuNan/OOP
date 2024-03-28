@@ -1,4 +1,4 @@
-package Collision;
+package GameEngine;
 
 import InputOutput.*;
 

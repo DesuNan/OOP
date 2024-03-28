@@ -1,11 +1,7 @@
-package Scene;
+package GameEngine;
 
 import java.util.*;
-import Collision.*;
-import InputOutput.*;
-import Player.*;
-import com.mygdx.game.*;
-import Entity.*;
+
 
 public class SceneManager {
 	private Stack<Scene> scenes; 

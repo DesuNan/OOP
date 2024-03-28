@@ -1,22 +1,23 @@
-package com.mygdx.game;
+package GameLayer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import GameEngine.SceneManager;
 import Scene.*;
 
-public class BadEntityFactory implements CollectibleFactory {
+public class GoodEntityFactory implements CollectibleFactory {
 
 	private SceneManager sm;
-	int count;
+	private int count;
 	private List<String> pictures;
-	public BadEntityFactory (SceneManager sm, int maxCount) {
+	public GoodEntityFactory (SceneManager sm, int maxCount) {
 		this.sm = sm;
 		this.count = maxCount;
 		this.pictures = new ArrayList<>();
-		this.pictures.add("Burger.png");
-		this.pictures.add("Fries.png");
+		this.pictures.add("Apple.png");
+		this.pictures.add("Brocolli.png");
 	}
 	@Override
 	public void createEntity() {
@@ -29,7 +30,7 @@ public class BadEntityFactory implements CollectibleFactory {
 		int speed = random.nextInt(9)+2;
 		String pic = this.pictures.get(random.nextInt(this.pictures.size()));
 		
-		this.sm.getEntityManager().addEntity(new Danger(800 ,Posy , speed, pic ));
+		this.sm.getEntityManager().addEntity(new Good(800 ,Posy , speed, pic ));
 		this.count = this.count - 1;
 	}
 	

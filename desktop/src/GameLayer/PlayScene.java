@@ -1,25 +1,18 @@
-package com.mygdx.game;
-import Scene.*;
+package GameLayer;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 
-import java.util.Random;
+import GameEngine.*;
 
 public class PlayScene extends Scene {
 	
-	private int screenWidth;
-	private int screenHeight;
-	private Texture bg_texture;
+	
+
 	private GoodEntityFactory gf;
 	private BadEntityFactory bf;
 
 	public PlayScene (SceneManager sm) {
 		super(sm);
-		final int screenWidth = 0;
-		final int screenHeight = 0;
 		
-		this.screenWidth = screenWidth;
-		this.screenHeight = screenHeight;
 		// Set game State, for synchronisation
 		this.sm.getGameLifeCycle().updateStatus(GameState.Play);
 		
@@ -32,7 +25,6 @@ public class PlayScene extends Scene {
 		sm.getPlayerManager().addPlayer(Bird.getInstance(sm.getPlayerManager(), 100,250,12,"Player.png",Input.Keys.SPACE));
 		sm.getEntityManager().addEntity(new Tube(800 ,-100 ,5 , "bottomtube.png"));
 		sm.getIOMan().playMusic("01 game-game_0.ogg");
-//sm.getEntityManager().addEntity(new Tube(800 ,500,5, "toptube.png"));
 		
 		
 	}
@@ -44,9 +36,6 @@ public class PlayScene extends Scene {
 			//sm.dispose();
 			sm.set(new EndScene(sm));
 		}
-		if(sm.getIOMan().keyPressOnce(Input.Keys.UP)) {
-			this.sm.getGameLifeCycle().updateStatus(GameState.Pause);
-		};
 	}
 	
 	@Override

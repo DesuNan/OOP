@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package GameEngine;
 import javax.swing.Timer;
 import InputOutput.*;
 import java.awt.event.ActionEvent;
@@ -10,15 +10,14 @@ public class GameClock {
 	private int elapsedTime;
     private Timer timer;
     private String text;
-    private SpriteBatch batch;
-    private BitmapFont font;
+    
     private InputOutputManager ioman;
-    private GameLifeCycle gm;
+   
     
     
-    public GameClock(InputOutputManager ioman, GameLifeCycle gm) {
+    public GameClock(InputOutputManager ioman) {
     	this.ioman=ioman;
-    	this.gm=gm;
+  
     	
         // Increases the timer by 1 every 1000 miliseconds.
         this.timer = new Timer(1000, new ActionListener() {

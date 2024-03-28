@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package GameEngine;
 
 // Enum States for communication between Scene, LifeCycle and Clock.
 public enum GameState {

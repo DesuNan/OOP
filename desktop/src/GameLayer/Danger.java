@@ -1,12 +1,11 @@
-package com.mygdx.game;
+package GameLayer;
+import GameEngine.*;
 
-import Entity.*;
-
-public class Good extends Entities{
+public class Danger extends Entities {
 	
 	private boolean hasCollidedWithPlayer = false;
 	
-	public Good(float x, float y, float speed, String imgPath) {
+	public Danger(float x, float y, float speed, String imgPath) {
 		this.setX(x);
 		this.setY(y);
 		this.setSpeed(speed);
@@ -20,6 +19,7 @@ public class Good extends Entities{
 	
 	@Override
 	public void dispose(EntitiesManager em) {
+//		em.getIOMan().disposeBatch();
 		em.getIOMan().disposeTexture(this.getImagePath());
 	}
 
@@ -41,5 +41,6 @@ public class Good extends Entities{
 	public void setCollidedWithPlayer(boolean collided) {
 	    this.hasCollidedWithPlayer = collided;
 	}
+
 	
 }

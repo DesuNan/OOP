@@ -1,4 +1,4 @@
-package Player;
+package GameEngine;
 
 public interface playerMoveable {
 	public void handleMovement(PlayersManager pm);

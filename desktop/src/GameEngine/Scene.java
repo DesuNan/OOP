@@ -1,4 +1,4 @@
-package Scene;
+package GameEngine;
 
 import com.mygdx.game.*;
 

@@ -1,8 +1,10 @@
-package Entity;
+package GameEngine;
 import java.util.ArrayList;
 import Collision.*;
+import GameLayer.Tube;
+
 import java.util.List;
-import InputOutput.InputOutputManager;
+
 import com.mygdx.game.*;
 
 public class EntitiesManager {

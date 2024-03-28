@@ -1,6 +1,5 @@
-package Entity;
-import InputOutput.*;
-import Collision.*;
+package GameEngine;
+
 
 abstract public class Entities implements aiMoveable, iCollision {
 	protected EntitiesManager em;

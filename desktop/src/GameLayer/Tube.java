@@ -1,6 +1,6 @@
-package com.mygdx.game;
+package GameLayer;
 
-import Entity.*;
+import GameEngine.*;
 
 public class Tube extends Entities {
 	

@@ -1,4 +1,4 @@
-package Scene;
+package GameEngine;
 
 //Test
 public interface iSwapScene {
