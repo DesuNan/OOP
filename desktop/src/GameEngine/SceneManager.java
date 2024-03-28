@@ -2,6 +2,8 @@ package GameEngine;
 
 import java.util.*;
 
+import GameLayer.SceneFactory;
+
 
 public class SceneManager {
 	private Stack<Scene> scenes; 

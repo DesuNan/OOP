@@ -1,8 +1,6 @@
-package Scene;
+package GameLayer;
 
-import com.mygdx.game.*;
-
-import InputOutput.InputOutputManager;
+import GameEngine.*;
 
 public class SceneFactory {
 

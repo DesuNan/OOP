@@ -1,6 +1,6 @@
-package com.mygdx.game;
-import InputOutput.InputOutputManager;
-import Scene.*;
+package GameLayer;
+
+import GameEngine.*;
 
 public class PauseScene extends Scene {
 	public PauseScene (InputOutputManager ioman, GameLifeCycle gm, SceneManager sm) {

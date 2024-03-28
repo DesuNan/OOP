@@ -4,7 +4,7 @@ import java.util.*;
 import Scene.*;
 import Collision.*;
 
-public class PlayersManager{
+public class PlayersManager {
 	private InputOutputManager ioman;
 	private CollisionManager cm;
 	private SceneManager sm;

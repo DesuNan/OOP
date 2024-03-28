@@ -1,4 +1,4 @@
-package Scene;
+package GameEngine;
 
 public enum SceneType {
 	START_SCENE,
