@@ -45,6 +45,18 @@ public class InputOutputManager extends InputAdapter{
 		this.pm = pm;
 	}
 	
+	public Texture getImage(String path) {
+	    return new Texture(path);
+	  }
+	  
+	public float getWidth(String path) {
+		  return this.getImage(path).getWidth();
+	  }
+	  
+	 public float getHeight(String path) {
+		  return this.getImage(path).getHeight();
+	  }
+	
 	public void draw(String imgPath, float x, float y) {
 			int count = textureCount.getOrDefault(imgPath,0);
 			Texture texture = null;
@@ -63,8 +75,26 @@ public class InputOutputManager extends InputAdapter{
 		    textureCount.put(imgPath, textureCount.getOrDefault(imgPath,0) +1);
 		    this.getBatch().draw(texture, x, y);
 		  }
-
-		  public void disposeTexture (String imgPath) {
+	  
+	public void draw(String imgPath, float x, float y, float width, float height) {
+			int count = textureCount.getOrDefault(imgPath,0);
+			Texture texture = null;
+			if (count == 0) {
+				texture = this.getImage(imgPath);
+				textureList.add(texture);
+			}
+			else {
+				for (Texture pic : textureList) {
+					if (pic.toString() == imgPath) {
+						texture = pic;
+					}
+				}
+			}
+				
+			textureCount.put(imgPath, textureCount.getOrDefault(imgPath,0) +1);
+			this.getBatch().draw(texture, x, y, width, height);
+			}
+	public void disposeTexture (String imgPath) {
 		    int count = textureCount.getOrDefault(imgPath,0);
 		    if (count > 0) {
 		      count --;
@@ -81,57 +111,31 @@ public class InputOutputManager extends InputAdapter{
 		    }
 
 		  }
-	  
-		  public void draw(String imgPath, float x, float y, float width, float height) {
-				int count = textureCount.getOrDefault(imgPath,0);
-				Texture texture = null;
-				if (count == 0) {
-					texture = this.getImage(imgPath);
-					textureList.add(texture);
-				}
-				else {
-					for (Texture pic : textureList) {
-						if (pic.toString() == imgPath) {
-							texture = pic;
-						}
-					}
-				}
-				
-			    textureCount.put(imgPath, textureCount.getOrDefault(imgPath,0) +1);
-			    this.getBatch().draw(texture, x, y, width, height);
-			  }
 
 			  
-	  public void createBatch() {
-	    this.batch = new SpriteBatch();
-	  }
-	  public void startBatch() {
+	public void createBatch() {
+		this.batch = new SpriteBatch();
+		}
+	
+	public void startBatch() {
 	    this.batch.begin();
-	  }
-	  public void stopBatch() {
+	    }
+	
+	public void stopBatch() {
 	    this.batch.end();
+	    }
+	  
+	public SpriteBatch getBatch() {
+	    return this.batch;
 	  }
-	  public void disposeBatch() {
+	
+	public void disposeBatch() {
 	    this.batch.dispose();
 	    this.disposeSound();
 	    this.disposeMusic();
-	  }
+	  	}
 	  
-	 public SpriteBatch getBatch() {
-	    return this.batch;
-	  }
-	  
-	  public Texture getImage(String path) {
-	    return new Texture(path);
-	  }
-	  
-	  public float getWidth(String path) {
-		  return this.getImage(path).getWidth();
-	  }
-	  
-	  public float getHeight(String path) {
-		  return this.getImage(path).getHeight();
-	  }
+	
 	  
 	  public boolean isTouched() {
 		  return Gdx.input.justTouched();
@@ -149,16 +153,11 @@ public class InputOutputManager extends InputAdapter{
 	     else return false;
 	   }
 	 
-	 public void clearKeys() {
-	        keysPressed.clear();
-	    }
-	 
 	@Override
 	public boolean keyDown(int keycode) {
 		keysPressed.add(keycode);
 		
 		return false;
-
 
 	}
 	@Override
@@ -166,6 +165,10 @@ public class InputOutputManager extends InputAdapter{
 		keysPressed.remove(keycode);
         return false;
 	}
+	
+	public void clearKeys() {
+        keysPressed.clear();
+    }
 	
 	public void playSound(String path) {
         if (sound != null) {

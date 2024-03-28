@@ -5,7 +5,7 @@ import java.util.Random;
 import GameEngine.Scene.SceneManager;
 import GameLayer.AIEntities.Danger;
 
-public class BadEntityFactory implements CollectibleFactory {
+public class BadEntityFactory implements AIFactory {
 
 	private SceneManager sm;
 	int count;

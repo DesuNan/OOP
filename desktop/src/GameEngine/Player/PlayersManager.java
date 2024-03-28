@@ -29,6 +29,15 @@ public class PlayersManager {
 		return this.ioman;
 	}
 	
+	// Method to get all players
+    public List<Players> getAllPlayers() {
+        return players;
+    }
+	
+    public List<playerMoveable> getAllMoveables() {
+        return imovables;
+    }
+	
 	// Method to add a player to the list
     public void addPlayer(Players player) {
         players.add(player);
@@ -51,15 +60,6 @@ public class PlayersManager {
     public void clearAll () {
     	this.getAllMoveables().clear();
     	this.getAllPlayers().clear();
-    }
-
-    // Method to get all players
-    public List<Players> getAllPlayers() {
-        return players;
-    }
-	
-    public List<playerMoveable> getAllMoveables() {
-        return imovables;
     }
     
     public void draw() {

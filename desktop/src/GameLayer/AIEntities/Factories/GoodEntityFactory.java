@@ -5,7 +5,7 @@ import java.util.Random;
 import GameEngine.Scene.SceneManager;
 import GameLayer.AIEntities.Good;
 
-public class GoodEntityFactory implements CollectibleFactory {
+public class GoodEntityFactory implements AIFactory {
 
 	private SceneManager sm;
 	private int count;
@@ -17,6 +17,7 @@ public class GoodEntityFactory implements CollectibleFactory {
 		this.pictures.add("Apple.png");
 		this.pictures.add("Brocolli.png");
 	}
+	
 	@Override
 	public void createEntity() {
 		// TODO Auto-generated method stub
