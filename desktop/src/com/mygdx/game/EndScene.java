@@ -3,13 +3,14 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import InputOutput.InputOutputManager;
 import Scene.*;
 
 public class EndScene extends Scene {
 	private Texture bg_texture;
 	private Texture gameover_texture;
 	
-	public EndScene (SceneManager sm) {
+	public EndScene (InputOutputManager ioman, GameLifeCycle gm, SceneManager sm) {
 		super(sm);
 		// Set game State, for synchronisation
 		this.sm.getGameLifeCycle().updateStatus(GameState.End);

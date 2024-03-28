@@ -3,6 +3,9 @@ import Scene.*;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 
+import InputOutput.InputOutputManager;
+import Scene.*;
+
 import java.util.Random;
 
 public class PlayScene extends Scene {
@@ -13,7 +16,7 @@ public class PlayScene extends Scene {
 	private GoodEntityFactory gf;
 	private BadEntityFactory bf;
 
-	public PlayScene (SceneManager sm) {
+	public PlayScene (InputOutputManager ioman, GameLifeCycle gm, SceneManager sm) {
 		super(sm);
 		final int screenWidth = 0;
 		final int screenHeight = 0;
@@ -31,8 +34,7 @@ public class PlayScene extends Scene {
 		
 		sm.getPlayerManager().addPlayer(Bird.getInstance(sm.getPlayerManager(), 100,250,12,"Player.png",Input.Keys.SPACE));
 		sm.getEntityManager().addEntity(new Tube(800 ,-100 ,5 , "bottomtube.png"));
-		sm.getIOMan().playMusic("01 game-game_0.ogg");
-//sm.getEntityManager().addEntity(new Tube(800 ,500,5, "toptube.png"));
+		sm.getEntityManager().addEntity(new Tube(800 ,500,5, "toptube.png"));
 		
 		
 	}
@@ -42,7 +44,7 @@ public class PlayScene extends Scene {
 		// TODO Auto-generated method stub
 		if(sm.getIOMan().isTouched()) {
 			//sm.dispose();
-			sm.set(new EndScene(sm));
+			sm.set(SceneType.END_SCENE);
 		}
 		if(sm.getIOMan().keyPressOnce(Input.Keys.UP)) {
 			this.sm.getGameLifeCycle().updateStatus(GameState.Pause);

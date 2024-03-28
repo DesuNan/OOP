@@ -50,22 +50,27 @@ public class SceneManager {
 		this.entityManager = em;
 	}
 	
-	public void push(Scene scene) {
-		scenes.push(scene);
-		if (scene instanceof iSwapScene) {
-			iSwapScene.push((iSwapScene) scene);
-        }
+	public void push(SceneType type) {
+	    Scene scene = SceneFactory.createScene(type, this.ioman, this.gm, this);
+	    scenes.push(scene);
+	    if (scene instanceof iSwapScene) {
+	        iSwapScene.push((iSwapScene) scene);
+	    }
 	}
 	
 	public void pop() {
-		scenes.peek().dispose(this);
-		scenes.pop();
-		iSwapScene.pop();
+	    if (!scenes.isEmpty()) {
+	        scenes.peek().dispose(this);
+	        scenes.pop();
+	        if (!iSwapScene.isEmpty()) {
+	            iSwapScene.pop();
+	        }
+	    }
 	}
 	
-	public void set(Scene scene) {
+	public void set(SceneType type) {
 		this.pop();
-		this.push(scene);
+		this.push(type);
 		
 	}
 	

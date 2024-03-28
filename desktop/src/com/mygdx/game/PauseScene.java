@@ -1,8 +1,9 @@
 package com.mygdx.game;
+import InputOutput.InputOutputManager;
 import Scene.*;
 
 public class PauseScene extends Scene {
-	public PauseScene (SceneManager sm) {
+	public PauseScene (InputOutputManager ioman, GameLifeCycle gm, SceneManager sm) {
 		super(sm);
 		
 	}
