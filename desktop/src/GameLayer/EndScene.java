@@ -7,7 +7,7 @@ import GameEngine.*;
 
 public class EndScene extends Scene {
 	
-	public EndScene (SceneManager sm) {
+	public EndScene (InputOutputManager ioman, GameLifeCycle gm, SceneManager sm) {
 		super(sm);
 		// Set game State, for synchronisation
 		this.sm.getGameLifeCycle().updateStatus(GameState.End);

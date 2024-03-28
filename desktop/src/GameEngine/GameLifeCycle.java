@@ -11,7 +11,7 @@ import GameLayer.StartScene;
 
 public class GameLifeCycle extends ApplicationAdapter {
 	public static final int WIDTH = 480;
-	public static final int HEIGHT = 600;
+	public static final int HEIGHT = 800;
 	private SceneManager sm;
 	private GameClock clock;
 	private GameState GameStatus;
@@ -35,8 +35,9 @@ public class GameLifeCycle extends ApplicationAdapter {
 		this.ioman.createBatch();
 		sm = new SceneManager(ioman, this);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
+		sm.push(SceneType.START_SCENE);
 		this.clock = new GameClock(ioman);	
-		sm.push(new StartScene(sm));
+		
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class GameLifeCycle extends ApplicationAdapter {
 		else if (this.getStatus() == GameState.Pause ){
 			this.clock.stop();
 			this.clock.draw();
-			// this.sm.set(new PauseScene(this.sm));
+			this.sm.set(SceneType.PAUSE_SCENE);
 			
 		}
 		else if (this.getStatus() == GameState.End){

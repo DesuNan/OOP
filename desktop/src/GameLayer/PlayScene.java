@@ -10,7 +10,7 @@ public class PlayScene extends Scene {
 	private GoodEntityFactory gf;
 	private BadEntityFactory bf;
 
-	public PlayScene (SceneManager sm) {
+	public PlayScene (InputOutputManager ioman, GameLifeCycle gm, SceneManager sm) {
 		super(sm);
 		
 		// Set game State, for synchronisation
@@ -34,7 +34,7 @@ public class PlayScene extends Scene {
 		// TODO Auto-generated method stub
 		if(sm.getIOMan().isTouched()) {
 			//sm.dispose();
-			sm.set(new EndScene(sm));
+			sm.set(SceneType.END_SCENE);
 		}
 	}
 	

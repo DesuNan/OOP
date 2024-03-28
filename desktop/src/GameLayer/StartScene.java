@@ -7,7 +7,7 @@ import GameEngine.*;
 public class StartScene extends Scene {
 
 	
-	public StartScene (SceneManager sm) {
+	public StartScene (InputOutputManager ioman, GameLifeCycle gm, SceneManager sm) {
 		super(sm);
 		// Set game State, for synchronisation
 		this.sm.getGameLifeCycle().updateStatus(GameState.Start);
@@ -19,7 +19,7 @@ public class StartScene extends Scene {
 		// TODO Auto-generated method stub
 		if(sm.getIOMan().isTouched()) {
 			sm.dispose();
-			sm.set(new PlayScene(sm));
+			sm.set(SceneType.PLAY_SCENE);
 		}
 		
 	}
@@ -32,7 +32,7 @@ public class StartScene extends Scene {
 	@Override
 	public void render(SceneManager sm) {
 		sm.getIOMan().draw("bg.png", 0, 0, (float) GameLifeCycle.WIDTH, (float)GameLifeCycle.HEIGHT);
-		sm.getIOMan().draw("message.png", (GameLifeCycle.WIDTH / 2) - (sm.getIOMan().getWidth("message.png") / 2),(float) (GameLifeCycle.HEIGHT/2) - 100);
+		sm.getIOMan().draw("message.png", (GameLifeCycle.WIDTH / 2) - (sm.getIOMan().getWidth("message.png") / 2), (GameLifeCycle.HEIGHT/2) - 100);
 	}
 	
 	
